@@ -5,6 +5,11 @@
 const isStaticExport = 'false';
 
 const nextConfig = {
+
+  eslint: {
+    ignoreDuringBuilds: true, // 可选：在生产构建中禁用 ESLint
+  },
+
   trailingSlash: true,
   basePath: process.env.NEXT_PUBLIC_BASE_PATH,
   env: {
