@@ -39,7 +39,7 @@ export function ProductDetailsReview({
 
   const renderSummary = (
     <Stack spacing={1} alignItems="center" justifyContent="center">
-      <Typography variant="subtitle2">Average rating</Typography>
+      <Typography variant="subtitle2">平均评级</Typography>
 
       <Typography variant="h2">
         {totalRatings}
@@ -49,7 +49,7 @@ export function ProductDetailsReview({
       <Rating readOnly value={totalRatings} precision={0.1} />
 
       <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-        ({fShortenNumber(totalReviews)} reviews)
+        ({fShortenNumber(totalReviews)} 评价者)
       </Typography>
     </Stack>
   );
@@ -101,7 +101,7 @@ export function ProductDetailsReview({
         onClick={review.onTrue}
         startIcon={<Iconify icon="solar:pen-bold" />}
       >
-        Write your review
+        写下你的评价
       </Button>
     </Stack>
   );

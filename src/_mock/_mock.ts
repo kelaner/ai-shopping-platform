@@ -1,45 +1,45 @@
-import { fSub } from 'src/utils/format-time';
+import {CONFIG} from 'src/config-global';
 
-import { CONFIG } from 'src/config-global';
+import {fSub} from 'src/utils/format-time';
 
 import {
-  _id,
   _ages,
-  _roles,
-  _prices,
-  _emails,
-  _ratings,
-  _nativeS,
-  _nativeM,
-  _nativeL,
-  _percents,
   _booleans,
-  _sentences,
-  _lastNames,
-  _fullNames,
-  _tourNames,
-  _jobTitles,
-  _taskNames,
-  _fileNames,
-  _postTitles,
-  _firstNames,
-  _eventNames,
-  _courseNames,
-  _fullAddress,
   _companyNames,
-  _productNames,
-  _descriptions,
-  _phoneNumbers,
   _countryNames,
+  _courseNames,
+  _descriptions,
+  _emails,
+  _eventNames,
+  _fileNames,
+  _firstNames,
+  _fullAddress,
+  _fullNames,
+  _id,
+  _jobTitles,
+  _lastNames,
+  _nativeL,
+  _nativeM,
+  _nativeS,
+  _percents,
+  _phoneNumbers,
+  _postTitles,
+  _prices,
+  _productNames,
+  _ratings,
+  _roles,
+  _sentences,
+  _taskNames,
+  _tourNames,
 } from './assets';
 
 // ----------------------------------------------------------------------
 
-const { assetURL } = CONFIG.site;
+const {assetURL} = CONFIG.site;
 
 export const _mock = {
   id: (index: number) => _id[index],
-  time: (index: number) => fSub({ days: index, hours: index }),
+  time: (index: number) => fSub({days: index, hours: index}),
   boolean: (index: number) => _booleans[index],
   role: (index: number) => _roles[index],
   // Text

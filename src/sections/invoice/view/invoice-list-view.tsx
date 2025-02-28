@@ -202,25 +202,25 @@ export function InvoiceListView() {
   return (
     <>
       <DashboardContent>
-        <CustomBreadcrumbs
-          heading="List"
-          links={[
-            { name: 'Dashboard', href: paths.dashboard.root },
-            { name: 'Invoice', href: paths.dashboard.invoice.root },
-            { name: 'List' },
-          ]}
-          action={
-            <Button
-              component={RouterLink}
-              href={paths.dashboard.invoice.new}
-              variant="contained"
-              startIcon={<Iconify icon="mingcute:add-line" />}
-            >
-              New invoice
-            </Button>
-          }
-          sx={{ mb: { xs: 3, md: 5 } }}
-        />
+        {/* <CustomBreadcrumbs */}
+        {/*   heading="List" */}
+        {/*   links={[ */}
+        {/*     { name: 'Dashboard', href: paths.dashboard.root }, */}
+        {/*     { name: 'Invoice', href: paths.dashboard.invoice.root }, */}
+        {/*     { name: 'List' }, */}
+        {/*   ]} */}
+        {/*   action={ */}
+        {/*     <Button */}
+        {/*       component={RouterLink} */}
+        {/*       href={paths.dashboard.invoice.new} */}
+        {/*       variant="contained" */}
+        {/*       startIcon={<Iconify icon="mingcute:add-line" />} */}
+        {/*     > */}
+        {/*       New invoice */}
+        {/*     </Button> */}
+        {/*   } */}
+        {/*   sx={{ mb: { xs: 3, md: 5 } }} */}
+        {/* /> */}
 
         <Card sx={{ mb: { xs: 3, md: 5 } }}>
           <Scrollbar sx={{ minHeight: 108 }}>

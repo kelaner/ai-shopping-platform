@@ -135,7 +135,7 @@ export function ProductDetailsSummary({
         sx={{ color: 'text.secondary', display: 'inline-flex', alignItems: 'center' }}
       >
         <Iconify icon="mingcute:add-line" width={16} sx={{ mr: 1 }} />
-        Compare
+        比较
       </Link>
 
       <Link
@@ -143,7 +143,7 @@ export function ProductDetailsSummary({
         sx={{ color: 'text.secondary', display: 'inline-flex', alignItems: 'center' }}
       >
         <Iconify icon="solar:heart-bold" width={16} sx={{ mr: 1 }} />
-        Favorite
+        喜爱
       </Link>
 
       <Link
@@ -151,7 +151,7 @@ export function ProductDetailsSummary({
         sx={{ color: 'text.secondary', display: 'inline-flex', alignItems: 'center' }}
       >
         <Iconify icon="solar:share-bold" width={16} sx={{ mr: 1 }} />
-        Share
+        分享
       </Link>
     </Stack>
   );
@@ -159,7 +159,7 @@ export function ProductDetailsSummary({
   const renderColorOptions = (
     <Stack direction="row">
       <Typography variant="subtitle2" sx={{ flexGrow: 1 }}>
-        Color
+        颜色
       </Typography>
 
       <Controller
@@ -180,7 +180,7 @@ export function ProductDetailsSummary({
   const renderSizeOptions = (
     <Stack direction="row">
       <Typography variant="subtitle2" sx={{ flexGrow: 1 }}>
-        Size
+        尺寸
       </Typography>
 
       <Field.Select
@@ -188,7 +188,7 @@ export function ProductDetailsSummary({
         size="small"
         helperText={
           <Link underline="always" color="textPrimary">
-            Size chart
+            尺码表
           </Link>
         }
         sx={{
@@ -208,7 +208,7 @@ export function ProductDetailsSummary({
   const renderQuantity = (
     <Stack direction="row">
       <Typography variant="subtitle2" sx={{ flexGrow: 1 }}>
-        Quantity
+        数量
       </Typography>
 
       <Stack spacing={1}>
@@ -222,7 +222,7 @@ export function ProductDetailsSummary({
         />
 
         <Typography variant="caption" component="div" sx={{ textAlign: 'right' }}>
-          Available: {available}
+          库存: {available}
         </Typography>
       </Stack>
     </Stack>
@@ -240,11 +240,11 @@ export function ProductDetailsSummary({
         onClick={handleAddCart}
         sx={{ whiteSpace: 'nowrap' }}
       >
-        Add to cart
+       加入购物车
       </Button>
 
       <Button fullWidth size="large" type="submit" variant="contained" disabled={disableActions}>
-        Buy now
+        立即购买
       </Button>
     </Stack>
   );
@@ -258,7 +258,7 @@ export function ProductDetailsSummary({
   const renderRating = (
     <Stack direction="row" alignItems="center" sx={{ color: 'text.disabled', typography: 'body2' }}>
       <Rating size="small" value={totalRatings} precision={0.1} readOnly sx={{ mr: 1 }} />
-      {`(${fShortenNumber(totalReviews)} reviews)`}
+      {`(${fShortenNumber(totalReviews)} 评论)`}
     </Stack>
   );
 

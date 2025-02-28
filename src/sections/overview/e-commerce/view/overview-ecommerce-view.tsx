@@ -1,29 +1,23 @@
 'use client';
 
-import Button from '@mui/material/Button';
+import {useCopilotAction} from "@copilotkit/react-core";
 import {useTheme} from '@mui/material/styles';
 import Grid from '@mui/material/Unstable_Grid2';
-
-import {DashboardContent} from 'src/layouts/dashboard';
+import {useEffect, useState} from "react";
+import {_ecommerceNewProducts, _ecommerceSalesOverview,} from 'src/_mock';
 import {MotivationIllustration} from 'src/assets/illustrations';
-import {
-  _ecommerceNewProducts,
-  _ecommerceBestSalesman,
-  _ecommerceSalesOverview,
-  _ecommerceLatestProducts,
-} from 'src/_mock';
 
 import {useMockedUser} from 'src/auth/hooks';
 
-import {EcommerceWelcome} from '../ecommerce-welcome';
+import {DashboardContent} from 'src/layouts/dashboard';
+import {EcommerceCurrentBalance} from '../ecommerce-current-balance';
 import {EcommerceNewProducts} from '../ecommerce-new-products';
-import {EcommerceYearlySales} from '../ecommerce-yearly-sales';
-import {EcommerceBestSalesman} from '../ecommerce-best-salesman';
 import {EcommerceSaleByGender} from '../ecommerce-sale-by-gender';
 import {EcommerceSalesOverview} from '../ecommerce-sales-overview';
+
+import {EcommerceWelcome} from '../ecommerce-welcome';
 import {EcommerceWidgetSummary} from '../ecommerce-widget-summary';
-import {EcommerceLatestProducts} from '../ecommerce-latest-products';
-import {EcommerceCurrentBalance} from '../ecommerce-current-balance';
+import {EcommerceYearlySales} from '../ecommerce-yearly-sales';
 
 // ----------------------------------------------------------------------
 
@@ -31,6 +25,49 @@ export function OverviewEcommerceView() {
   const {user} = useMockedUser();
 
   const theme = useTheme();
+
+  const [defaultYear, setDefaultYear] = useState<string>("2023");
+
+
+  const EcommerceYearlySalesView = () => (
+    <EcommerceYearlySales
+      title="年销售额"
+      subheader="(+43%) 相比去年"
+      defaultYear={defaultYear ?? "2023"}
+      chart={{
+        categories: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+        series: [
+          {
+            name: "2022",
+            data: [
+              {
+                name: "总收入",
+                data: [10, 41, 35, 51, 49, 62, 69, 91, 148, 35, 51, 49],
+              },
+              {
+                name: "总花费",
+                data: [10, 34, 13, 56, 77, 88, 99, 77, 45, 13, 56, 77],
+              },
+            ],
+          },
+          {
+            name: "2023",
+            data: [
+              {
+                name: "总收入",
+                data: [51, 35, 41, 10, 91, 69, 62, 148, 91, 69, 62, 49],
+              },
+              {
+                name: "总花费",
+                data: [56, 13, 34, 10, 77, 99, 88, 45, 77, 99, 88, 77],
+              },
+            ],
+          },
+        ],
+      }}
+    />
+  );
+
 
   return (
     <DashboardContent maxWidth="xl">
@@ -105,41 +142,7 @@ export function OverviewEcommerceView() {
         </Grid>
 
         <Grid xs={12} md={6} lg={8}>
-          <EcommerceYearlySales
-            title="年销售额"
-            subheader="(+43%) 相比去年"
-            chart={{
-              categories: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
-              series: [
-                {
-                  name: '2022',
-                  data: [
-                    {
-                      name: '总收入',
-                      data: [10, 41, 35, 51, 49, 62, 69, 91, 148, 35, 51, 49],
-                    },
-                    {
-                      name: '总花费',
-                      data: [10, 34, 13, 56, 77, 88, 99, 77, 45, 13, 56, 77],
-                    },
-                  ],
-                },
-                {
-                  name: '2023',
-                  data: [
-                    {
-                      name: '总收入',
-                      data: [51, 35, 41, 10, 91, 69, 62, 148, 91, 69, 62, 49],
-                    },
-                    {
-                      name: '总花费',
-                      data: [56, 13, 34, 10, 77, 99, 88, 45, 77, 99, 88, 77],
-                    },
-                  ],
-                },
-              ],
-            }}
-          />
+          <EcommerceYearlySalesView/>
         </Grid>
 
         <Grid xs={12} md={6} lg={8}>

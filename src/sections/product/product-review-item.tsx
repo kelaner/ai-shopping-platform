@@ -51,7 +51,7 @@ export function ProductReviewItem({ review }: Props) {
           sx={{ color: 'success.main', typography: 'caption' }}
         >
           <Iconify icon="ic:round-verified" width={16} sx={{ mr: 0.5 }} />
-          Verified purchase
+          已验证购买
         </Stack>
       )}
 

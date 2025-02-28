@@ -1,21 +1,20 @@
-import type { CardProps } from '@mui/material/Card';
-import type { ChartOptions } from 'src/components/chart';
-
-import { useState, useCallback } from 'react';
-
+import type {CardProps} from '@mui/material/Card';
 import Card from '@mui/material/Card';
-import { useTheme } from '@mui/material/styles';
 import CardHeader from '@mui/material/CardHeader';
+import {useTheme} from '@mui/material/styles';
 
-import { fShortenNumber } from 'src/utils/format-number';
+import {useCallback, useState} from 'react';
+import type {ChartOptions} from 'src/components/chart';
+import {Chart, ChartLegends, ChartSelect, useChart} from 'src/components/chart';
 
-import { Chart, useChart, ChartSelect, ChartLegends } from 'src/components/chart';
+import {fShortenNumber} from 'src/utils/format-number';
 
 // ----------------------------------------------------------------------
 
 type Props = CardProps & {
   title?: string;
   subheader?: string;
+  defaultYear?: string;
   chart: {
     colors?: string[];
     categories?: string[];
@@ -30,16 +29,17 @@ type Props = CardProps & {
   };
 };
 
-export function EcommerceYearlySales({ title, subheader, chart, ...other }: Props) {
+export function EcommerceYearlySales({title, subheader, chart, ...other}: Props) {
   const theme = useTheme();
 
-  const [selectedSeries, setSelectedSeries] = useState('2023');
+  const [selectedSeries, setSelectedSeries] = useState(other.defaultYear ?? '2023');
+
 
   const chartColors = chart.colors ?? [theme.palette.primary.main, theme.palette.warning.main];
 
   const chartOptions = useChart({
     colors: chartColors,
-    xaxis: { categories: chart.categories },
+    xaxis: {categories: chart.categories},
     ...chart.options,
   });
 
@@ -48,6 +48,7 @@ export function EcommerceYearlySales({ title, subheader, chart, ...other }: Prop
   }, []);
 
   const currentSeries = chart.series.find((i) => i.name === selectedSeries);
+
 
   return (
     <Card {...other}>
@@ -61,14 +62,14 @@ export function EcommerceYearlySales({ title, subheader, chart, ...other }: Prop
             onChange={handleChangeSeries}
           />
         }
-        sx={{ mb: 3 }}
+        sx={{mb: 3}}
       />
 
       <ChartLegends
         colors={chartOptions?.colors}
         labels={chart.series[0].data.map((item) => item.name)}
         values={[fShortenNumber(1234), fShortenNumber(6789)]}
-        sx={{ px: 3, gap: 3 }}
+        sx={{px: 3, gap: 3}}
       />
 
       <Chart
@@ -76,8 +77,8 @@ export function EcommerceYearlySales({ title, subheader, chart, ...other }: Prop
         series={currentSeries?.data}
         options={chartOptions}
         height={320}
-        loadingProps={{ sx: { p: 2.5 } }}
-        sx={{ py: 2.5, pl: 1, pr: 2.5 }}
+        loadingProps={{sx: {p: 2.5}}}
+        sx={{py: 2.5, pl: 1, pr: 2.5}}
       />
     </Card>
   );

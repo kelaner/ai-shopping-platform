@@ -1,23 +1,26 @@
-import axios, { endpoints } from 'src/utils/axios';
+import axios, {endpoints} from 'src/utils/axios';
 
-import { CONFIG } from 'src/config-global';
+import {CONFIG} from 'src/config-global';
 
-import { ProductDetailsView } from 'src/sections/product/view';
+import {ProductDetailsView} from 'src/sections/product/view';
+
+import projectData from "./data.json"
 
 // ----------------------------------------------------------------------
 
-export const metadata = { title: `Product details | Dashboard - ${CONFIG.site.name}` };
+export const metadata = {title: `Product details | Dashboard - ${CONFIG.site.name}`};
 
 type Props = {
   params: { id: string };
 };
 
-export default async function Page({ params }: Props) {
-  const { id } = params;
+export default async function Page({params}: Props) {
+  const {id} = params;
 
-  const { product } = await getProduct(id);
+  // const { product } = await getProduct(id);
+  const {product} = projectData
 
-  return <ProductDetailsView product={product} />;
+  return <ProductDetailsView product={product}/>;
 }
 
 // ----------------------------------------------------------------------
@@ -36,7 +39,7 @@ async function getProduct(id: string) {
  */
 const dynamic = CONFIG.isStaticExport ? 'auto' : 'force-dynamic';
 
-export { dynamic };
+export {dynamic};
 
 /**
  * [2] Static exports
@@ -46,7 +49,7 @@ export async function generateStaticParams() {
   if (CONFIG.isStaticExport) {
     const res = await axios.get(endpoints.product.list);
 
-    return res.data.products.map((product: { id: string }) => ({ id: product.id }));
+    return res.data.products.map((product: { id: string }) => ({id: product.id}));
   }
   return [];
 }

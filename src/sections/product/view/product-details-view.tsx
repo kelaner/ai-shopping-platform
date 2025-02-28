@@ -1,50 +1,50 @@
 'use client';
 
-import type { IProductItem } from 'src/types/product';
-
-import { useState, useEffect, useCallback } from 'react';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
 
 import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
-import Card from '@mui/material/Card';
-import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Unstable_Grid2';
 
-import { paths } from 'src/routes/paths';
+import {useCallback, useEffect, useState} from 'react';
+import {PRODUCT_PUBLISH_OPTIONS} from 'src/_mock';
 
-import { useTabs } from 'src/hooks/use-tabs';
+import {Iconify} from 'src/components/iconify';
 
-import { varAlpha } from 'src/theme/styles';
-import { PRODUCT_PUBLISH_OPTIONS } from 'src/_mock';
-import { DashboardContent } from 'src/layouts/dashboard';
+import {useTabs} from 'src/hooks/use-tabs';
+import {DashboardContent} from 'src/layouts/dashboard';
 
-import { Iconify } from 'src/components/iconify';
+import {paths} from 'src/routes/paths';
 
-import { ProductDetailsReview } from '../product-details-review';
-import { ProductDetailsSummary } from '../product-details-summary';
-import { ProductDetailsToolbar } from '../product-details-toolbar';
-import { ProductDetailsCarousel } from '../product-details-carousel';
-import { ProductDetailsDescription } from '../product-details-description';
+import {varAlpha} from 'src/theme/styles';
+import type {IProductItem} from 'src/types/product';
+import {ProductDetailsCarousel} from '../product-details-carousel';
+import {ProductDetailsDescription} from '../product-details-description';
+
+import {ProductDetailsReview} from '../product-details-review';
+import {ProductDetailsSummary} from '../product-details-summary';
+import {ProductDetailsToolbar} from '../product-details-toolbar';
 
 // ----------------------------------------------------------------------
 
 const SUMMARY = [
   {
-    title: '100% original',
-    description: 'Chocolate bar candy canes ice cream toffee cookie halvah.',
-    icon: 'solar:verified-check-bold',
+    "title": "100% 正品",
+    "description": "我们承诺所有产品均为正品，质量有保障，让您购买无忧。",
+    "icon": "solar:verified-check-bold"
   },
   {
-    title: '10 days replacement',
-    description: 'Marshmallow biscuit donut dragée fruitcake wafer.',
-    icon: 'solar:clock-circle-bold',
+    "title": "10天退换",
+    "description": "提供10天无理由退换服务，如有任何问题，可随时联系客服处理。",
+    "icon": "solar:clock-circle-bold"
   },
   {
-    title: 'Year warranty',
-    description: 'Cotton candy gingerbread cake I love sugar sweet.',
-    icon: 'solar:shield-check-bold',
-  },
+    "title": "一年保修",
+    "description": "享受一年免费保修服务，售后无忧，品质保障。",
+    "icon": "solar:shield-check-bold"
+  }
 ];
 
 // ----------------------------------------------------------------------
@@ -53,7 +53,7 @@ type Props = {
   product?: IProductItem;
 };
 
-export function ProductDetailsView({ product }: Props) {
+export function ProductDetailsView({product}: Props) {
   const tabs = useTabs('description');
 
   const [publish, setPublish] = useState('');
@@ -79,31 +79,31 @@ export function ProductDetailsView({ product }: Props) {
         publishOptions={PRODUCT_PUBLISH_OPTIONS}
       />
 
-      <Grid container spacing={{ xs: 3, md: 5, lg: 8 }}>
+      <Grid container spacing={{xs: 3, md: 5, lg: 8}}>
         <Grid xs={12} md={6} lg={7}>
-          <ProductDetailsCarousel images={product?.images ?? []} />
+          <ProductDetailsCarousel images={product?.images ?? []}/>
         </Grid>
 
         <Grid xs={12} md={6} lg={5}>
-          {product && <ProductDetailsSummary disableActions product={product} />}
+          {product && <ProductDetailsSummary disableActions product={product}/>}
         </Grid>
       </Grid>
 
       <Box
         gap={5}
         display="grid"
-        gridTemplateColumns={{ xs: 'repeat(1, 1fr)', md: 'repeat(3, 1fr)' }}
-        sx={{ my: 10 }}
+        gridTemplateColumns={{xs: 'repeat(1, 1fr)', md: 'repeat(3, 1fr)'}}
+        sx={{my: 10}}
       >
         {SUMMARY.map((item) => (
-          <Box key={item.title} sx={{ textAlign: 'center', px: 5 }}>
-            <Iconify icon={item.icon} width={32} sx={{ color: 'primary.main' }} />
+          <Box key={item.title} sx={{textAlign: 'center', px: 5}}>
+            <Iconify icon={item.icon} width={32} sx={{color: 'primary.main'}}/>
 
-            <Typography variant="subtitle1" sx={{ mb: 1, mt: 2 }}>
+            <Typography variant="subtitle1" sx={{mb: 1, mt: 2}}>
               {item.title}
             </Typography>
 
-            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+            <Typography variant="body2" sx={{color: 'text.secondary'}}>
               {item.description}
             </Typography>
           </Box>
@@ -121,15 +121,15 @@ export function ProductDetailsView({ product }: Props) {
           }}
         >
           {[
-            { value: 'description', label: 'Description' },
-            { value: 'reviews', label: `Reviews (${product?.reviews.length})` },
+            {value: 'description', label: '描述'},
+            {value: 'reviews', label: `评价 (${product?.reviews.length})`},
           ].map((tab) => (
-            <Tab key={tab.value} value={tab.value} label={tab.label} />
+            <Tab key={tab.value} value={tab.value} label={tab.label}/>
           ))}
         </Tabs>
 
         {tabs.value === 'description' && (
-          <ProductDetailsDescription description={product?.description ?? ''} />
+          <ProductDetailsDescription description={product?.description ?? ''}/>
         )}
 
         {tabs.value === 'reviews' && (

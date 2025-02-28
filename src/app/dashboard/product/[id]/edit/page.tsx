@@ -23,11 +23,19 @@ export default async function Page({ params }: Props) {
 // ----------------------------------------------------------------------
 
 async function getProduct(id: string) {
-  const URL = id ? `${endpoints.product.details}?productId=${id}` : '';
+  if (!id) {
+    console.error("Invalid product ID");
+    return { product: null }; // 返回默认值或抛出错误
+  }
 
-  const res = await axios.get(URL);
-
-  return res.data;
+  const URL = `${endpoints.product.details}?productId=${id}`;
+  try {
+    const res = await axios.get(URL, { timeout: 10000 }); // 设置超时时间为 10 秒
+    return res.data;
+  } catch (error) {
+    console.error("Failed to fetch product:", error);
+    return { product: null }; // 或抛出自定义错误
+  }
 }
 
 /**

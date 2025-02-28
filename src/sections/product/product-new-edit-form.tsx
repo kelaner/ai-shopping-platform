@@ -1,59 +1,64 @@
-import type { IProductItem } from 'src/types/product';
+import {useCopilotReadable} from "@copilotkit/react-core";
+import {CopilotTextarea} from "@copilotkit/react-textarea";
 
-import { z as zod } from 'zod';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useMemo, useState, useEffect, useCallback } from 'react';
+import {zodResolver} from '@hookform/resolvers/zod';
+import LoadingButton from '@mui/lab/LoadingButton';
 
 import Box from '@mui/material/Box';
-import Chip from '@mui/material/Chip';
 import Card from '@mui/material/Card';
-import Stack from '@mui/material/Stack';
-import Switch from '@mui/material/Switch';
-import Divider from '@mui/material/Divider';
 import CardHeader from '@mui/material/CardHeader';
-import Typography from '@mui/material/Typography';
-import LoadingButton from '@mui/lab/LoadingButton';
-import InputAdornment from '@mui/material/InputAdornment';
+import Chip from '@mui/material/Chip';
+import Divider from '@mui/material/Divider';
 import FormControlLabel from '@mui/material/FormControlLabel';
-
-import { paths } from 'src/routes/paths';
-import { useRouter } from 'src/routes/hooks';
+import InputAdornment from '@mui/material/InputAdornment';
+import Stack from '@mui/material/Stack';
+import {useTheme} from '@mui/material/styles';
+import Switch from '@mui/material/Switch';
+import TextField from "@mui/material/TextField";
+import Typography from '@mui/material/Typography';
+import {useCallback, useEffect, useMemo, useState} from 'react';
+import {useForm} from 'react-hook-form';
 
 import {
   _tags,
-  PRODUCT_SIZE_OPTIONS,
-  PRODUCT_GENDER_OPTIONS,
-  PRODUCT_COLOR_NAME_OPTIONS,
   PRODUCT_CATEGORY_GROUP_OPTIONS,
+  PRODUCT_COLOR_NAME_OPTIONS,
+  PRODUCT_GENDER_OPTIONS,
+  PRODUCT_SIZE_OPTIONS,
 } from 'src/_mock';
+import {Field, Form, schemaHelper} from 'src/components/hook-form';
 
-import { toast } from 'src/components/snackbar';
-import { Form, Field, schemaHelper } from 'src/components/hook-form';
+import {toast} from 'src/components/snackbar';
+import {useRouter} from 'src/routes/hooks';
+
+import {paths} from 'src/routes/paths';
+import type {IProductItem} from 'src/types/product';
+
+import {z as zod} from 'zod';
 
 // ----------------------------------------------------------------------
 
 export type NewProductSchemaType = zod.infer<typeof NewProductSchema>;
 
 export const NewProductSchema = zod.object({
-  name: zod.string().min(1, { message: 'Name is required!' }),
-  description: schemaHelper.editor({ message: { required_error: 'Description is required!' } }),
-  images: schemaHelper.files({ message: { required_error: 'Images is required!' } }),
-  code: zod.string().min(1, { message: 'Product code is required!' }),
-  sku: zod.string().min(1, { message: 'Product sku is required!' }),
-  quantity: zod.number().min(1, { message: 'Quantity is required!' }),
-  colors: zod.string().array().nonempty({ message: 'Choose at least one option!' }),
-  sizes: zod.string().array().nonempty({ message: 'Choose at least one option!' }),
-  tags: zod.string().array().min(2, { message: 'Must have at least 2 items!' }),
-  gender: zod.string().array().nonempty({ message: 'Choose at least one option!' }),
-  price: zod.number().min(1, { message: 'Price should not be $0.00' }),
+  name: zod.string().min(1, {message: 'Name is required!'}),
+  description: schemaHelper.editor({message: {required_error: 'Description is required!'}}),
+  images: schemaHelper.files({message: {required_error: 'Images is required!'}}),
+  code: zod.string().min(1, {message: 'Product code is required!'}),
+  sku: zod.string().min(1, {message: 'Product sku is required!'}),
+  quantity: zod.number().min(1, {message: 'Quantity is required!'}),
+  colors: zod.string().array().nonempty({message: 'Choose at least one option!'}),
+  sizes: zod.string().array().nonempty({message: 'Choose at least one option!'}),
+  tags: zod.string().array().min(2, {message: 'Must have at least 2 items!'}),
+  gender: zod.string().array().nonempty({message: 'Choose at least one option!'}),
+  price: zod.number().min(1, {message: 'Price should not be $0.00'}),
   // Not required
   category: zod.string(),
   priceSale: zod.number(),
   subDescription: zod.string(),
   taxes: zod.number(),
-  saleLabel: zod.object({ enabled: zod.boolean(), content: zod.string() }),
-  newLabel: zod.object({ enabled: zod.boolean(), content: zod.string() }),
+  saleLabel: zod.object({enabled: zod.boolean(), content: zod.string()}),
+  newLabel: zod.object({enabled: zod.boolean(), content: zod.string()}),
 });
 
 // ----------------------------------------------------------------------
@@ -62,7 +67,7 @@ type Props = {
   currentProduct?: IProductItem;
 };
 
-export function ProductNewEditForm({ currentProduct }: Props) {
+export function ProductNewEditForm({currentProduct}: Props) {
   const router = useRouter();
 
   const [includeTaxes, setIncludeTaxes] = useState(false);
@@ -85,8 +90,8 @@ export function ProductNewEditForm({ currentProduct }: Props) {
       category: currentProduct?.category || PRODUCT_CATEGORY_GROUP_OPTIONS[0].classify[1],
       colors: currentProduct?.colors || [],
       sizes: currentProduct?.sizes || [],
-      newLabel: currentProduct?.newLabel || { enabled: false, content: '' },
-      saleLabel: currentProduct?.saleLabel || { enabled: false, content: '' },
+      newLabel: currentProduct?.newLabel || {enabled: false, content: ''},
+      saleLabel: currentProduct?.saleLabel || {enabled: false, content: ''},
     }),
     [currentProduct]
   );
@@ -101,7 +106,7 @@ export function ProductNewEditForm({ currentProduct }: Props) {
     watch,
     setValue,
     handleSubmit,
-    formState: { isSubmitting },
+    formState: {isSubmitting},
   } = methods;
 
   const values = watch();
@@ -141,31 +146,72 @@ export function ProductNewEditForm({ currentProduct }: Props) {
   );
 
   const handleRemoveAllFiles = useCallback(() => {
-    setValue('images', [], { shouldValidate: true });
+    setValue('images', [], {shouldValidate: true});
   }, [setValue]);
 
   const handleChangeIncludeTaxes = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setIncludeTaxes(event.target.checked);
   }, []);
 
+  const [name, setName] = useState<string>('');
+  const [text, setText] = useState<string>('');
+
+  const handleChangeName = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value);
+  }, []);
+
+  useCopilotReadable({
+    description: "当前页面要新添加的产品的名字",
+    value: name
+  });
+
+  const theme = useTheme();
+
   const renderDetails = (
     <Card>
-      <CardHeader title="Details" subheader="Title, short description, image..." sx={{ mb: 3 }} />
+      <CardHeader title="详情" subheader="标题、简短描述、图片..." sx={{mb: 3}}/>
 
-      <Divider />
+      <Divider/>
 
-      <Stack spacing={3} sx={{ p: 3 }}>
-        <Field.Text name="name" label="Product name" />
-
-        <Field.Text name="subDescription" label="Sub description" multiline rows={4} />
+      <Stack spacing={3} sx={{p: 3}}>
+        {/* <Field.Text name="name" label="产品名称"/> */}
+        <TextField
+          variant="outlined"
+          fullWidth
+          label="产品名称"
+          value={name}
+          onChange={handleChangeName}
+        />
 
         <Stack spacing={1.5}>
-          <Typography variant="subtitle2">Content</Typography>
-          <Field.Editor name="description" sx={{ maxHeight: 480 }} />
+          <Typography variant="subtitle2">描述</Typography>
+          <CopilotTextarea
+            value={text}
+            onValueChange={(value) => setText(value)}
+            placeholder="请输入产品描述..."
+            autosuggestionsConfig={{
+              textareaPurpose: "描述当前页面要新添加的产品的功能和特点",
+              chatApiConfigs: {},
+            }}
+            style={{
+              width: "100%",
+              border: `1px solid ${theme.palette.grey[400]}`,
+              borderRadius: theme.shape.borderRadius,
+              padding: theme.spacing(1),
+              backgroundColor: theme.palette.background.paper,
+              minHeight: 200
+            }}
+          />
+        </Stack>
+
+
+        <Stack spacing={1.5}>
+          <Typography variant="subtitle2">内容</Typography>
+          <Field.Editor name="description" sx={{maxHeight: 480}}/>
         </Stack>
 
         <Stack spacing={1.5}>
-          <Typography variant="subtitle2">Images</Typography>
+          <Typography variant="subtitle2">图片</Typography>
           <Field.Upload
             multiple
             thumbnail
@@ -183,33 +229,33 @@ export function ProductNewEditForm({ currentProduct }: Props) {
   const renderProperties = (
     <Card>
       <CardHeader
-        title="Properties"
-        subheader="Additional functions and attributes..."
-        sx={{ mb: 3 }}
+        title="特性"
+        subheader="添加功能和属性..."
+        sx={{mb: 3}}
       />
 
-      <Divider />
+      <Divider/>
 
-      <Stack spacing={3} sx={{ p: 3 }}>
+      <Stack spacing={3} sx={{p: 3}}>
         <Box
           columnGap={2}
           rowGap={3}
           display="grid"
-          gridTemplateColumns={{ xs: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }}
+          gridTemplateColumns={{xs: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)'}}
         >
-          <Field.Text name="code" label="Product code" />
+          <Field.Text name="code" label="产品代码"/>
 
-          <Field.Text name="sku" label="Product SKU" />
+          <Field.Text name="sku" label="产品SKU"/>
 
           <Field.Text
             name="quantity"
-            label="Quantity"
+            label="数量"
             placeholder="0"
             type="number"
-            InputLabelProps={{ shrink: true }}
+            InputLabelProps={{shrink: true}}
           />
 
-          <Field.Select native name="category" label="Category" InputLabelProps={{ shrink: true }}>
+          <Field.Select native name="category" label="分类" InputLabelProps={{shrink: true}}>
             {PRODUCT_CATEGORY_GROUP_OPTIONS.map((category) => (
               <optgroup key={category.group} label={category.group}>
                 {category.classify.map((classify) => (
@@ -224,16 +270,16 @@ export function ProductNewEditForm({ currentProduct }: Props) {
           <Field.MultiSelect
             checkbox
             name="colors"
-            label="Colors"
+            label="颜色"
             options={PRODUCT_COLOR_NAME_OPTIONS}
           />
 
-          <Field.MultiSelect checkbox name="sizes" label="Sizes" options={PRODUCT_SIZE_OPTIONS} />
+          <Field.MultiSelect checkbox name="sizes" label="尺寸" options={PRODUCT_SIZE_OPTIONS}/>
         </Box>
 
         <Field.Autocomplete
           name="tags"
-          label="Tags"
+          label="标签"
           placeholder="+ Tags"
           multiple
           freeSolo
@@ -248,7 +294,7 @@ export function ProductNewEditForm({ currentProduct }: Props) {
           renderTags={(selected, getTagProps) =>
             selected.map((option, index) => (
               <Chip
-                {...getTagProps({ index })}
+                {...getTagProps({index})}
                 key={option}
                 label={option}
                 size="small"
@@ -260,27 +306,27 @@ export function ProductNewEditForm({ currentProduct }: Props) {
         />
 
         <Stack spacing={1}>
-          <Typography variant="subtitle2">Gender</Typography>
-          <Field.MultiCheckbox row name="gender" options={PRODUCT_GENDER_OPTIONS} sx={{ gap: 2 }} />
+          <Typography variant="subtitle2">人群</Typography>
+          <Field.MultiCheckbox row name="gender" options={PRODUCT_GENDER_OPTIONS} sx={{gap: 2}}/>
         </Stack>
 
-        <Divider sx={{ borderStyle: 'dashed' }} />
+        <Divider sx={{borderStyle: 'dashed'}}/>
 
         <Stack direction="row" alignItems="center" spacing={3}>
-          <Field.Switch name="saleLabel.enabled" label={null} sx={{ m: 0 }} />
+          <Field.Switch name="saleLabel.enabled" label={null} sx={{m: 0}}/>
           <Field.Text
             name="saleLabel.content"
-            label="Sale label"
+            label="销售标签"
             fullWidth
             disabled={!values.saleLabel.enabled}
           />
         </Stack>
 
         <Stack direction="row" alignItems="center" spacing={3}>
-          <Field.Switch name="newLabel.enabled" label={null} sx={{ m: 0 }} />
+          <Field.Switch name="newLabel.enabled" label={null} sx={{m: 0}}/>
           <Field.Text
             name="newLabel.content"
-            label="New label"
+            label="新标签"
             fullWidth
             disabled={!values.newLabel.enabled}
           />
@@ -291,22 +337,22 @@ export function ProductNewEditForm({ currentProduct }: Props) {
 
   const renderPricing = (
     <Card>
-      <CardHeader title="Pricing" subheader="Price related inputs" sx={{ mb: 3 }} />
+      <CardHeader title="定价" sx={{mb: 3}}/>
 
-      <Divider />
+      <Divider/>
 
-      <Stack spacing={3} sx={{ p: 3 }}>
+      <Stack spacing={3} sx={{p: 3}}>
         <Field.Text
           name="price"
-          label="Regular price"
+          label="正常价格"
           placeholder="0.00"
           type="number"
-          InputLabelProps={{ shrink: true }}
+          InputLabelProps={{shrink: true}}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <Box component="span" sx={{ color: 'text.disabled' }}>
-                  $
+                <Box component="span" sx={{color: 'text.disabled'}}>
+                  ￥
                 </Box>
               </InputAdornment>
             ),
@@ -315,46 +361,46 @@ export function ProductNewEditForm({ currentProduct }: Props) {
 
         <Field.Text
           name="priceSale"
-          label="Sale price"
+          label="销售价格"
           placeholder="0.00"
           type="number"
-          InputLabelProps={{ shrink: true }}
+          InputLabelProps={{shrink: true}}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <Box component="span" sx={{ color: 'text.disabled' }}>
-                  $
+                <Box component="span" sx={{color: 'text.disabled'}}>
+                  ￥
                 </Box>
               </InputAdornment>
             ),
           }}
         />
 
-        <FormControlLabel
-          control={
-            <Switch id="toggle-taxes" checked={includeTaxes} onChange={handleChangeIncludeTaxes} />
-          }
-          label="Price includes taxes"
-        />
+        {/* <FormControlLabel */}
+        {/*   control={ */}
+        {/*     <Switch id="toggle-taxes" checked={includeTaxes} onChange={handleChangeIncludeTaxes} /> */}
+        {/*   } */}
+        {/*   label="价格含税" */}
+        {/* /> */}
 
-        {!includeTaxes && (
-          <Field.Text
-            name="taxes"
-            label="Tax (%)"
-            placeholder="0.00"
-            type="number"
-            InputLabelProps={{ shrink: true }}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <Box component="span" sx={{ color: 'text.disabled' }}>
-                    %
-                  </Box>
-                </InputAdornment>
-              ),
-            }}
-          />
-        )}
+        {/* {!includeTaxes && ( */}
+        {/*   <Field.Text */}
+        {/*     name="taxes" */}
+        {/*     label="Tax (%)" */}
+        {/*     placeholder="0.00" */}
+        {/*     type="number" */}
+        {/*     InputLabelProps={{ shrink: true }} */}
+        {/*     InputProps={{ */}
+        {/*       startAdornment: ( */}
+        {/*         <InputAdornment position="start"> */}
+        {/*           <Box component="span" sx={{ color: 'text.disabled' }}> */}
+        {/*             % */}
+        {/*           </Box> */}
+        {/*         </InputAdornment> */}
+        {/*       ), */}
+        {/*     }} */}
+        {/*   /> */}
+        {/* )} */}
       </Stack>
     </Card>
   );
@@ -362,20 +408,20 @@ export function ProductNewEditForm({ currentProduct }: Props) {
   const renderActions = (
     <Stack spacing={3} direction="row" alignItems="center" flexWrap="wrap">
       <FormControlLabel
-        control={<Switch defaultChecked inputProps={{ id: 'publish-switch' }} />}
-        label="Publish"
-        sx={{ pl: 3, flexGrow: 1 }}
+        control={<Switch defaultChecked inputProps={{id: 'publish-switch'}}/>}
+        label="发布"
+        sx={{pl: 3, flexGrow: 1}}
       />
 
       <LoadingButton type="submit" variant="contained" size="large" loading={isSubmitting}>
-        {!currentProduct ? 'Create product' : 'Save changes'}
+        {!currentProduct ? '创建产品' : '保存更改'}
       </LoadingButton>
     </Stack>
   );
 
   return (
     <Form methods={methods} onSubmit={onSubmit}>
-      <Stack spacing={{ xs: 3, md: 5 }} sx={{ mx: 'auto', maxWidth: { xs: 720, xl: 880 } }}>
+      <Stack spacing={{xs: 3, md: 5}} sx={{mx: 'auto', maxWidth: {xs: 720, xl: 880}}}>
         {renderDetails}
 
         {renderProperties}

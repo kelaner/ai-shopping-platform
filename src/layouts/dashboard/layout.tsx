@@ -1,34 +1,34 @@
 'use client';
 
-import type { SettingsState } from 'src/components/settings';
-import type { NavSectionProps } from 'src/components/nav-section';
-import type { Theme, SxProps, CSSObject, Breakpoint } from '@mui/material/styles';
-
-import { useMemo } from 'react';
+import {CopilotPopup} from "@copilotkit/react-ui";
 
 import Alert from '@mui/material/Alert';
-import { useTheme } from '@mui/material/styles';
-import { iconButtonClasses } from '@mui/material/IconButton';
+import {iconButtonClasses} from '@mui/material/IconButton';
+import type {Breakpoint, CSSObject, SxProps, Theme} from '@mui/material/styles';
+import {useTheme} from '@mui/material/styles';
 
-import { useBoolean } from 'src/hooks/use-boolean';
+import {useMemo} from 'react';
+import {_contacts, _notifications} from 'src/_mock';
+import type {NavSectionProps} from 'src/components/nav-section';
+import {bulletColor} from 'src/components/nav-section';
+import type {SettingsState} from 'src/components/settings';
+import {useSettingsContext} from 'src/components/settings';
 
-import { allLangs } from 'src/locales';
-import { _contacts, _notifications } from 'src/_mock';
-import { varAlpha, stylesMode } from 'src/theme/styles';
+import {useBoolean} from 'src/hooks/use-boolean';
 
-import { bulletColor } from 'src/components/nav-section';
-import { useSettingsContext } from 'src/components/settings';
+import {allLangs} from 'src/locales';
+import {stylesMode, varAlpha} from 'src/theme/styles';
+import {layoutClasses} from '../classes';
+import {_account} from '../config-nav-account';
+import {navData as dashboardNavData} from '../config-nav-dashboard';
+import {_workspaces} from '../config-nav-workspace';
+import {HeaderBase} from '../core/header-base';
+import {LayoutSection} from '../core/layout-section';
 
-import { Main } from './main';
-import { NavMobile } from './nav-mobile';
-import { layoutClasses } from '../classes';
-import { NavVertical } from './nav-vertical';
-import { NavHorizontal } from './nav-horizontal';
-import { _account } from '../config-nav-account';
-import { HeaderBase } from '../core/header-base';
-import { _workspaces } from '../config-nav-workspace';
-import { LayoutSection } from '../core/layout-section';
-import { navData as dashboardNavData } from '../config-nav-dashboard';
+import {Main} from './main';
+import {NavHorizontal} from './nav-horizontal';
+import {NavMobile} from './nav-mobile';
+import {NavVertical} from './nav-vertical';
 
 // ----------------------------------------------------------------------
 
@@ -40,7 +40,7 @@ export type DashboardLayoutProps = {
   };
 };
 
-export function DashboardLayout({ sx, children, data }: DashboardLayoutProps) {
+export function DashboardLayout({sx, children, data}: DashboardLayoutProps) {
   const theme = useTheme();
 
   const mobileNavOpen = useBoolean();
@@ -59,8 +59,18 @@ export function DashboardLayout({ sx, children, data }: DashboardLayoutProps) {
 
   const isNavVertical = isNavMini || settings.navLayout === 'vertical';
 
+
   return (
     <>
+      <CopilotPopup
+        instructions="您的模型是DeepSeek 最新推出的推理模型 DeepSeek-R1，您正在尽最大努力帮助用户。根据您所掌握的数据，以最佳方式回答。注意，尽量以中文回答。"
+        labels={{
+          title: "智能客服",
+          initial: "我有什么能帮您的吗?",
+        }}
+      />
+
+
       <NavMobile
         data={navData}
         open={mobileNavOpen.value}
@@ -92,7 +102,7 @@ export function DashboardLayout({ sx, children, data }: DashboardLayoutProps) {
             }}
             slots={{
               topArea: (
-                <Alert severity="info" sx={{ display: 'none', borderRadius: 0 }}>
+                <Alert severity="info" sx={{display: 'none', borderRadius: 0}}>
                   This is an info Alert.
                 </Alert>
               ),
@@ -111,7 +121,7 @@ export function DashboardLayout({ sx, children, data }: DashboardLayoutProps) {
                     display: 'none',
                   },
                   [`& [data-area="right"]`]: {
-                    gap: { xs: 0, sm: 0.75 },
+                    gap: {xs: 0, sm: 0.75},
                   },
                   ...(isNavHorizontal && {
                     bgcolor: 'var(--layout-nav-bg)',
@@ -126,7 +136,7 @@ export function DashboardLayout({ sx, children, data }: DashboardLayoutProps) {
                     },
                     [`& [data-slot="logo"]`]: {
                       display: 'none',
-                      [theme.breakpoints.up(layoutQuery)]: { display: 'inline-flex' },
+                      [theme.breakpoints.up(layoutQuery)]: {display: 'inline-flex'},
                     },
                     [`& [data-slot="divider"]`]: {
                       [theme.breakpoints.up(layoutQuery)]: {
@@ -139,7 +149,7 @@ export function DashboardLayout({ sx, children, data }: DashboardLayoutProps) {
               container: {
                 maxWidth: false,
                 sx: {
-                  ...(isNavVertical && { px: { [layoutQuery]: 5 } }),
+                  ...(isNavVertical && {px: {[layoutQuery]: 5}}),
                 },
               },
             }}
@@ -208,7 +218,7 @@ function useNavColorVars(
   settings: SettingsState
 ): Record<'layout' | 'section', CSSObject> {
   const {
-    vars: { palette },
+    vars: {palette},
   } = theme;
 
   return useMemo(() => {

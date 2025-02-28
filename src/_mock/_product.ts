@@ -1,7 +1,7 @@
 export const PRODUCT_GENDER_OPTIONS = [
-  { label: 'Men', value: 'Men' },
-  { label: 'Women', value: 'Women' },
-  { label: 'Kids', value: 'Kids' },
+  { label: '男装', value: 'Men' },
+  { label: '女装', value: 'Women' },
+  { label: '童装', value: 'Kids' },
 ];
 
 export const PRODUCT_CATEGORY_OPTIONS = ['Shose', 'Apparel', 'Accessories'];
@@ -45,14 +45,14 @@ export const PRODUCT_SIZE_OPTIONS = [
 ];
 
 export const PRODUCT_STOCK_OPTIONS = [
-  { value: 'in stock', label: 'In stock' },
-  { value: 'low stock', label: 'Low stock' },
-  { value: 'out of stock', label: 'Out of stock' },
+  { value: 'in stock', label: '有货' },
+  { value: 'low stock', label: '库存少' },
+  { value: 'out of stock', label: '缺货' },
 ];
 
 export const PRODUCT_PUBLISH_OPTIONS = [
-  { value: 'published', label: 'Published' },
-  { value: 'draft', label: 'Draft' },
+  { value: 'published', label: '发布' },
+  { value: 'draft', label: '草稿' },
 ];
 
 export const PRODUCT_SORT_OPTIONS = [
@@ -63,9 +63,9 @@ export const PRODUCT_SORT_OPTIONS = [
 ];
 
 export const PRODUCT_CATEGORY_GROUP_OPTIONS = [
-  { group: 'Clothing', classify: ['Shirts', 'T-shirts', 'Jeans', 'Leather', 'Accessories'] },
-  { group: 'Tailored', classify: ['Suits', 'Blazers', 'Trousers', 'Waistcoats', 'Apparel'] },
-  { group: 'Accessories', classify: ['Shoes', 'Backpacks and bags', 'Bracelets', 'Face masks'] },
+  { "group": "服装", "classify": ["衬衫", "T恤", "牛仔裤", "皮革", "配饰"] },
+  { "group": "定制", "classify": ["西装", "夹克", "长裤", "背心", "服装"] },
+  { "group": "配饰", "classify": ["鞋子", "背包和包", "手链", "口罩"] }
 ];
 
 export const PRODUCT_CHECKOUT_STEPS = ['Cart', 'Billing & address', 'Payment'];

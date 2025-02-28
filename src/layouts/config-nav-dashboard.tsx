@@ -1,15 +1,12 @@
-import { paths } from 'src/routes/paths';
+import {SvgColor} from 'src/components/svg-color';
 
-import { CONFIG } from 'src/config-global';
-
-import { Label } from 'src/components/label';
-import { Iconify } from 'src/components/iconify';
-import { SvgColor } from 'src/components/svg-color';
+import {CONFIG} from 'src/config-global';
+import {paths} from 'src/routes/paths';
 
 // ----------------------------------------------------------------------
 
 const icon = (name: string) => (
-  <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/${name}.svg`} />
+  <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/${name}.svg`}/>
 );
 
 const ICONS = {
@@ -50,15 +47,52 @@ export const navData = [
   {
     subheader: 'Overview',
     items: [
-      { title: '总览', path: paths.dashboard.root, icon: ICONS.dashboard },
-      { title: '电商', path: paths.dashboard.general.ecommerce, icon: ICONS.ecommerce },
-      { title: '分析', path: paths.dashboard.general.analytics, icon: ICONS.analytics },
-      { title: '账户', path: paths.dashboard.general.banking, icon: ICONS.banking },
+      {title: '总览', path: paths.dashboard.root, icon: ICONS.dashboard},
+      {title: '电商', path: paths.dashboard.general.ecommerce, icon: ICONS.ecommerce},
+      {title: '分析', path: paths.dashboard.general.analytics, icon: ICONS.analytics},
+      {title: '账户', path: paths.dashboard.general.banking, icon: ICONS.banking},
       // { title: '订单', path: paths.dashboard.general.booking, icon: ICONS.booking },
       // { title: '文件', path: paths.dashboard.general.file, icon: ICONS.file },
       // { title: '课程', path: paths.dashboard.general.course, icon: ICONS.course },
     ],
   },
+
+  {
+    subheader: 'Management',
+    items: [
+      {
+        title: '发布',
+        path: paths.dashboard.product.root,
+        icon: ICONS.product,
+        children: [
+          {title: '列表', path: paths.dashboard.product.root},
+          // {title: '详情', path: paths.dashboard.product.demo.details},
+          {title: '添加', path: paths.dashboard.product.new},
+        ],
+      },
+          {
+            title: '订单',
+            path: paths.dashboard.order.root,
+            icon: ICONS.order,
+            // children: [
+            //   { title: '列表', path: paths.dashboard.order.root },
+            //   { title: '详情', path: paths.dashboard.order.demo.details },
+            // ],
+          },
+          {
+            title: '发票',
+            path: paths.dashboard.invoice.root,
+            icon: ICONS.invoice,
+            children: [
+              { title: '列表', path: paths.dashboard.invoice.root },
+              // { title: '详情', path: paths.dashboard.invoice.demo.details },
+              { title: '添加', path: paths.dashboard.invoice.new },
+            ],
+          },
+    ]
+  }
+
+
   /**
    * Management
    */

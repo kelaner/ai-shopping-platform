@@ -134,7 +134,7 @@ export function HomeHero({ sx, ...other }: StackProps) {
             />
           ))}
         </AvatarGroup>
-        160+ 满意顾客
+        欢迎加入智链云商，一起开启智能commerce
       </Box>
     </MInview>
   );

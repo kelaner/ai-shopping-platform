@@ -1,0 +1,158 @@
+{
+  "product": {
+    "id": "e99f09a7-dd88-49d5-b1c8-1daf80c2d7b2",
+    "gender": [
+      "Men"
+    ],
+    "publish": "published",
+    "category": "Shose",
+    "available": 72,
+    "priceSale": null,
+    "taxes": 10,
+    "quantity": 80,
+    "sizes": [
+      "6",
+      "7",
+      "8",
+      "8.5",
+      "9",
+      "9.5",
+      "10",
+      "10.5",
+      "11",
+      "11.5",
+      "12",
+      "13"
+    ],
+    "inventoryType": "有货",
+    "images": [
+      "https://api-dev-minimal-v6.vercel.app/assets/images/m-product/product-1.webp",
+      "https://api-dev-minimal-v6.vercel.app/assets/images/m-product/product-2.webp",
+      "https://api-dev-minimal-v6.vercel.app/assets/images/m-product/product-3.webp",
+      "https://api-dev-minimal-v6.vercel.app/assets/images/m-product/product-4.webp",
+      "https://api-dev-minimal-v6.vercel.app/assets/images/m-product/product-5.webp",
+      "https://api-dev-minimal-v6.vercel.app/assets/images/m-product/product-6.webp",
+      "https://api-dev-minimal-v6.vercel.app/assets/images/m-product/product-7.webp",
+      "https://api-dev-minimal-v6.vercel.app/assets/images/m-product/product-8.webp"
+    ],
+    "ratings": [
+      {
+        "name": "1星",
+        "starCount": 9911,
+        "reviewCount": 1947
+      },
+      {
+        "name": "2星",
+        "starCount": 1947,
+        "reviewCount": 9124
+      },
+      {
+        "name": "3星",
+        "starCount": 9124,
+        "reviewCount": 6984
+      },
+      {
+        "name": "4星",
+        "starCount": 6984,
+        "reviewCount": 8488
+      },
+      {
+        "name": "5星",
+        "starCount": 8488,
+        "reviewCount": 2034
+      }
+    ],
+    "reviews": [
+      {
+        "id": "e99f09a7-dd88-49d5-b1c8-1daf80c2d7b1",
+        "name": "杰文·西蒙",
+        "postedAt": "2025-02-28T05:28:47+00:00",
+        "comment": "太阳缓缓地沉入地平线，将天空染成橙色和粉色的鲜艳色调。",
+        "isPurchased": true,
+        "rating": 4.2,
+        "avatarUrl": "https://api-dev-minimal-v6.vercel.app/assets/images/avatar/avatar-1.webp",
+        "helpful": 9911,
+        "attachments": []
+      },
+      {
+        "id": "e99f09a7-dd88-49d5-b1c8-1daf80c2d7b2",
+        "name": "卢西安·奥布莱恩",
+        "postedAt": "2025-02-27T04:28:47+00:00",
+        "comment": "她急切地打开礼物，眼睛闪烁着兴奋的光芒。",
+        "isPurchased": true,
+        "rating": 3.7,
+        "avatarUrl": "https://api-dev-minimal-v6.vercel.app/assets/images/avatar/avatar-2.webp",
+        "helpful": 1947,
+        "attachments": [
+          "https://api-dev-minimal-v6.vercel.app/assets/images/m-product/product-1.webp"
+        ]
+      },
+      {
+        "id": "e99f09a7-dd88-49d5-b1c8-1daf80c2d7b3",
+        "name": "德贾·布拉迪",
+        "postedAt": "2025-02-26T03:28:47+00:00",
+        "comment": "那棵古老的橡树高大而雄伟，枝条在微风中轻轻摇曳。",
+        "isPurchased": true,
+        "rating": 4.5,
+        "avatarUrl": "https://api-dev-minimal-v6.vercel.app/assets/images/avatar/avatar-3.webp",
+        "helpful": 9124,
+        "attachments": []
+      },
+      {
+        "id": "e99f09a7-dd88-49d5-b1c8-1daf80c2d7b4",
+        "name": "哈里森·斯坦",
+        "postedAt": "2025-02-25T02:28:47+00:00",
+        "comment": "新鲜煮好的咖啡的香气弥漫在空气中，唤醒了我的感官。",
+        "isPurchased": false,
+        "rating": 3.5,
+        "avatarUrl": "https://api-dev-minimal-v6.vercel.app/assets/images/avatar/avatar-4.webp",
+        "helpful": 6984,
+        "attachments": [
+          "https://api-dev-minimal-v6.vercel.app/assets/images/m-product/product-3.webp",
+          "https://api-dev-minimal-v6.vercel.app/assets/images/m-product/product-4.webp"
+        ]
+      },
+      {
+        "id": "e99f09a7-dd88-49d5-b1c8-1daf80c2d7b5",
+        "name": "里斯·钟",
+        "postedAt": "2025-02-24T01:28:47+00:00",
+        "comment": "孩子们在炎热的夏日里穿过洒水器，欢快地笑着。",
+        "isPurchased": false,
+        "rating": 0.5,
+        "avatarUrl": "https://api-dev-minimal-v6.vercel.app/assets/images/avatar/avatar-5.webp",
+        "helpful": 8488,
+        "attachments": []
+      }
+    ],
+    "tags": [
+      "Technology",
+      "Health and Wellness",
+      "Travel",
+      "Finance",
+      "Education"
+    ],
+    "code": "38BEE271",
+    "description": "\n<h6>规格</h6>\n<ol>\n  <li>类别</li>\n  <li>鞋子</li>\n</ol>\n<ol>\n  <li>制造商</li>\n  <li>耐克</li>\n</ol>\n<ol>\n  <li>序列号</li>\n  <li>358607726380311</li>\n</ol>\n<ol>\n  <li>发货地</li>\n  <li>美国</li>\n</ol>\n<h6>产品详情</h6>\n<ul>\n  <li>\n    <p>泡沫鞋垫柔软舒适</p>\n  </li>\n  <li>\n    <p>拉环设计</p>\n  </li>\n  <li>\n    <p>非个人防护装备</p>\n  </li>\n  <li>\n    <p>颜色：白色/黑色/氧气紫/动感葡萄</p>\n  </li>\n  <li>\n    <p>款式：921826-109</p>\n  </li>\n  <li>\n    <p>产地：中国</p>\n  </li>\n</ul>\n<h6>优势</h6>\n<ul>\n  <li>\n    <p>鞋面采用网眼和合成材料，保留了 OG 的流线型外观，同时增加了舒适性和耐用性</p>\n  </li>\n  <li>\n    <p>全掌 Max Air 气垫单元，提供柔软舒适的脚感</p>\n  </li>\n  <li>\n    <p>泡沫中底轻盈柔软</p>\n  </li>\n  <li>\n    <p>橡胶外底提供抓地力和耐用性</p>\n  </li>\n</ul>\n<h6>配送与退货</h6>\n<p>订单满 $200 即享免费标准配送</p>\n<ul>\n  <li>\n    <p>标准配送：4-5 个工作日</p>\n  </li>\n  <li>\n    <p>快递配送：2-4 个工作日</p>\n  </li>\n</ul>\n<p>订单处理及配送时间为周一至周五（公共假期除外）</p>\n\n",
+    "newLabel": {
+      "enabled": true,
+      "content": "NEW"
+    },
+    "sku": "WW75K5211YW/SV",
+    "createdAt": "2025-02-27T04:28:47+00:00",
+    "saleLabel": {
+      "enabled": false,
+      "content": "SALE"
+    },
+    "name": "经典皮革乐福鞋",
+    "price": 97.14,
+    "coverUrl": "https://api-dev-minimal-v6.vercel.app/assets/images/m-product/product-2.webp",
+    "totalRatings": 3.7,
+    "totalSold": 684,
+    "totalReviews": 9124,
+    "subDescription": "这款鞋子采用经典的波浪纹理设计，灵感来源于日本新干线，让你的风格全速前进。",
+    "colors": [
+      "#1890FF",
+      "#FFC0CB"
+    ]
+  }
+}

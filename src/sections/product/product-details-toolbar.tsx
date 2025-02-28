@@ -1,18 +1,16 @@
-import type { StackProps } from '@mui/material/Stack';
-
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuList from '@mui/material/MenuList';
-import MenuItem from '@mui/material/MenuItem';
-import IconButton from '@mui/material/IconButton';
 import LoadingButton from '@mui/lab/LoadingButton';
 
-import { RouterLink } from 'src/routes/components';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import MenuItem from '@mui/material/MenuItem';
+import MenuList from '@mui/material/MenuList';
+import type {StackProps} from '@mui/material/Stack';
+import Stack from '@mui/material/Stack';
+import {CustomPopover, usePopover} from 'src/components/custom-popover';
 
-import { Iconify } from 'src/components/iconify';
-import { usePopover, CustomPopover } from 'src/components/custom-popover';
+import {Iconify} from 'src/components/iconify';
+
+import {RouterLink} from 'src/routes/components';
 
 // ----------------------------------------------------------------------
 
@@ -29,54 +27,54 @@ type Props = StackProps & {
 };
 
 export function ProductDetailsToolbar({
-  publish,
-  backLink,
-  editLink,
-  liveLink,
-  publishOptions,
-  onChangePublish,
-  sx,
-  ...other
-}: Props) {
+                                        publish,
+                                        backLink,
+                                        editLink,
+                                        liveLink,
+                                        publishOptions,
+                                        onChangePublish,
+                                        sx,
+                                        ...other
+                                      }: Props) {
   const popover = usePopover();
 
   return (
     <>
-      <Stack spacing={1.5} direction="row" sx={{ mb: { xs: 3, md: 5 }, ...sx }} {...other}>
+      <Stack spacing={1.5} direction="row" sx={{mb: {xs: 3, md: 5}, ...sx}} {...other}>
         <Button
           component={RouterLink}
           href={backLink}
-          startIcon={<Iconify icon="eva:arrow-ios-back-fill" width={16} />}
+          startIcon={<Iconify icon="eva:arrow-ios-back-fill" width={16}/>}
         >
-          Back
+          返回
         </Button>
 
-        <Box sx={{ flexGrow: 1 }} />
+        <Box sx={{flexGrow: 1}}/>
 
-        {publish === 'published' && (
-          <Tooltip title="Go Live">
-            <IconButton component={RouterLink} href={liveLink}>
-              <Iconify icon="eva:external-link-fill" />
-            </IconButton>
-          </Tooltip>
-        )}
+        {/* {publish === 'published' && ( */}
+        {/*   <Tooltip title="Go Live"> */}
+        {/*     <IconButton component={RouterLink} href={liveLink}> */}
+        {/*       <Iconify icon="eva:external-link-fill" /> */}
+        {/*     </IconButton> */}
+        {/*   </Tooltip> */}
+        {/* )} */}
 
-        <Tooltip title="Edit">
-          <IconButton component={RouterLink} href={editLink}>
-            <Iconify icon="solar:pen-bold" />
-          </IconButton>
-        </Tooltip>
+        {/* <Tooltip title="Edit"> */}
+        {/*   <IconButton component={RouterLink} href={editLink}> */}
+        {/*     <Iconify icon="solar:pen-bold" /> */}
+        {/*   </IconButton> */}
+        {/* </Tooltip> */}
 
         <LoadingButton
           color="inherit"
           variant="contained"
           loading={!publish}
           loadingIndicator="Loading…"
-          endIcon={<Iconify icon="eva:arrow-ios-downward-fill" />}
+          endIcon={<Iconify icon="eva:arrow-ios-downward-fill"/>}
           onClick={popover.onOpen}
-          sx={{ textTransform: 'capitalize' }}
+          sx={{textTransform: 'capitalize'}}
         >
-          {publish}
+          {publish ? "发布" : "草稿"}
         </LoadingButton>
       </Stack>
 
@@ -84,7 +82,7 @@ export function ProductDetailsToolbar({
         open={popover.open}
         anchorEl={popover.anchorEl}
         onClose={popover.onClose}
-        slotProps={{ arrow: { placement: 'top-right' } }}
+        slotProps={{arrow: {placement: 'top-right'}}}
       >
         <MenuList>
           {publishOptions.map((option) => (
@@ -96,8 +94,8 @@ export function ProductDetailsToolbar({
                 onChangePublish(option.value);
               }}
             >
-              {option.value === 'published' && <Iconify icon="eva:cloud-upload-fill" />}
-              {option.value === 'draft' && <Iconify icon="solar:file-text-bold" />}
+              {option.value === 'published' && <Iconify icon="eva:cloud-upload-fill"/>}
+              {option.value === 'draft' && <Iconify icon="solar:file-text-bold"/>}
               {option.label}
             </MenuItem>
           ))}
