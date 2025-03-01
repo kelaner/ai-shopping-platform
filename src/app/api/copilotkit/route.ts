@@ -11,9 +11,7 @@ const model = new ChatOpenAI({
 });
 
 const serviceAdapter = new LangChainAdapter({
-  chainFn: async ({messages, tools}) => {
-    return model.stream(messages);
-  }
+  chainFn: async ({messages, tools}) => model.stream(messages)
 });
 
 const runtime = new CopilotRuntime();
