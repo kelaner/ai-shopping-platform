@@ -1,6 +1,7 @@
-import {CopilotRuntime, copilotRuntimeNextJSAppRouterEndpoint, LangChainAdapter,} from '@copilotkit/runtime';
+import type {NextRequest} from 'next/server';
+
 import {ChatOpenAI} from "@langchain/openai";
-import {NextRequest} from 'next/server';
+import {CopilotRuntime, LangChainAdapter, copilotRuntimeNextJSAppRouterEndpoint,} from '@copilotkit/runtime';
 
 const model = new ChatOpenAI({
   model: "deepseek-chat",
