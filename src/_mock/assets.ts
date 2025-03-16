@@ -272,7 +272,7 @@ export const _phoneNumbers = [
 export const _countryNames = [
   'United States',
   'Canada',
-  '天津',
+  '中国',
   'United Kingdom',
   'Australia',
   'India',
