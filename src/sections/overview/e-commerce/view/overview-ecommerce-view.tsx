@@ -1,23 +1,24 @@
 'use client';
 
+import { useState} from "react";
 import {useCopilotAction} from "@copilotkit/react-core";
+
 import {useTheme} from '@mui/material/styles';
 import Grid from '@mui/material/Unstable_Grid2';
-import {useEffect, useState} from "react";
-import {_ecommerceNewProducts, _ecommerceSalesOverview,} from 'src/_mock';
+
+import {DashboardContent} from 'src/layouts/dashboard';
 import {MotivationIllustration} from 'src/assets/illustrations';
+import {_ecommerceNewProducts, _ecommerceSalesOverview,} from 'src/_mock';
 
 import {useMockedUser} from 'src/auth/hooks';
 
-import {DashboardContent} from 'src/layouts/dashboard';
-import {EcommerceCurrentBalance} from '../ecommerce-current-balance';
+import {EcommerceWelcome} from '../ecommerce-welcome';
 import {EcommerceNewProducts} from '../ecommerce-new-products';
+import {EcommerceYearlySales} from '../ecommerce-yearly-sales';
 import {EcommerceSaleByGender} from '../ecommerce-sale-by-gender';
 import {EcommerceSalesOverview} from '../ecommerce-sales-overview';
-
-import {EcommerceWelcome} from '../ecommerce-welcome';
 import {EcommerceWidgetSummary} from '../ecommerce-widget-summary';
-import {EcommerceYearlySales} from '../ecommerce-yearly-sales';
+import {EcommerceCurrentBalance} from '../ecommerce-current-balance';
 
 // ----------------------------------------------------------------------
 
@@ -27,6 +28,7 @@ export function OverviewEcommerceView() {
   const theme = useTheme();
 
   const [defaultYear, setDefaultYear] = useState<string>("2023");
+
 
 
   const EcommerceYearlySalesView = () => (
@@ -67,6 +69,32 @@ export function OverviewEcommerceView() {
       }}
     />
   );
+
+  // useCopilotAction({
+  //   name: "selectYearToDisplay",
+  //   description: "选择展示不同年份的年销售额数据",
+  //   parameters: [
+  //     {
+  //       name: "year",
+  //       type: "string",
+  //       description: "年份",
+  //     },
+  //   ],
+  //   // handler: async ({year}) => {
+  //   //   setDefaultYear(year);
+  //   // },
+  //   render: ({status, args}) => {
+  //     const {year} = args;
+  //     if(year){
+  //       setDefaultYear(year);
+  //     }
+  //     if (status === 'inProgress') {
+  //       return <textarea>加载中</textarea>; // Your own component for loading state
+  //     }
+  //       return <> {EcommerceYearlySalesView}</>;
+  //
+  //   },
+  // });
 
 
   return (

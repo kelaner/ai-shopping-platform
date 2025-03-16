@@ -63,7 +63,7 @@ export function DashboardLayout({sx, children, data}: DashboardLayoutProps) {
   return (
     <>
       <CopilotPopup
-        instructions="您正在尽最大努力帮助用户。根据您所掌握的数据，以最佳方式回答。注意，尽量以中文回答。注意，不要用代码格式回答！"
+        instructions="您正在尽最大努力帮助用户。根据您所掌握的数据，以最佳方式回答。注意，尽量以中文回答。注意，不要用代码格式回答！注意：不要回答任何涉及调用函数的问题与不要用调用函数来回答任何问题！"
         labels={{
           title: "智能客服",
           initial: "我有什么能帮您的吗?",

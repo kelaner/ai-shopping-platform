@@ -1,3 +1,5 @@
+import {useCopilotAction} from "@copilotkit/react-core";
+
 import type {CardProps} from '@mui/material/Card';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -48,6 +50,7 @@ export function EcommerceYearlySales({title, subheader, chart, ...other}: Props)
   }, []);
 
   const currentSeries = chart.series.find((i) => i.name === selectedSeries);
+
 
 
   return (
