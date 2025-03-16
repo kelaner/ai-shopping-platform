@@ -63,7 +63,7 @@ export function DashboardLayout({sx, children, data}: DashboardLayoutProps) {
   return (
     <>
       <CopilotPopup
-        instructions="您的模型是DeepSeek 最新推出的推理模型 DeepSeek-R1，您正在尽最大努力帮助用户。根据您所掌握的数据，以最佳方式回答。注意，尽量以中文回答。"
+        instructions="您正在尽最大努力帮助用户。根据您所掌握的数据，以最佳方式回答。注意，尽量以中文回答。注意，不要用代码格式回答！"
         labels={{
           title: "智能客服",
           initial: "我有什么能帮您的吗?",
