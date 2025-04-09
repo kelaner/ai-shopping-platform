@@ -13,11 +13,11 @@ const model = new ChatOpenAI({
 });
 
 const serviceAdapter = new LangChainAdapter({
-  chainFn: async ({ messages, tools }) => {
-    return model.bindTools(tools).stream(messages);
+  chainFn: async ({ messages, tools }) =>
+     model.bindTools(tools).stream(messages)
     // or optionally enable strict mode
     // return model.bindTools(tools, { strict: true }).stream(messages);
-  }
+
 });
 
 const runtime = new CopilotRuntime();
