@@ -1,24 +1,25 @@
 'use client';
 
-import { useState} from "react";
-import {useCopilotAction} from "@copilotkit/react-core";
+import {useCopilotAction, useCopilotReadable} from "@copilotkit/react-core";
 
 import {useTheme} from '@mui/material/styles';
 import Grid from '@mui/material/Unstable_Grid2';
-
-import {DashboardContent} from 'src/layouts/dashboard';
-import {MotivationIllustration} from 'src/assets/illustrations';
+import {useState} from "react";
 import {_ecommerceNewProducts, _ecommerceSalesOverview,} from 'src/_mock';
+import {MotivationIllustration} from 'src/assets/illustrations';
 
 import {useMockedUser} from 'src/auth/hooks';
 
-import {EcommerceWelcome} from '../ecommerce-welcome';
+import {DashboardContent} from 'src/layouts/dashboard';
+import {paths} from "src/routes/paths";
+import {EcommerceCurrentBalance} from '../ecommerce-current-balance';
 import {EcommerceNewProducts} from '../ecommerce-new-products';
-import {EcommerceYearlySales} from '../ecommerce-yearly-sales';
 import {EcommerceSaleByGender} from '../ecommerce-sale-by-gender';
 import {EcommerceSalesOverview} from '../ecommerce-sales-overview';
+
+import {EcommerceWelcome} from '../ecommerce-welcome';
 import {EcommerceWidgetSummary} from '../ecommerce-widget-summary';
-import {EcommerceCurrentBalance} from '../ecommerce-current-balance';
+import {EcommerceYearlySales} from '../ecommerce-yearly-sales';
 
 // ----------------------------------------------------------------------
 
@@ -29,72 +30,75 @@ export function OverviewEcommerceView() {
 
   const [defaultYear, setDefaultYear] = useState<string>("2023");
 
+  const qvalue = {
+    categories: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+    series: [
+      {
+        name: "2022",
+        data: [
+          {
+            name: "总收入",
+            data: [10, 41, 35, 51, 49, 62, 69, 91, 148, 35, 51, 49],
+          },
+          {
+            name: "总花费",
+            data: [10, 34, 13, 56, 77, 88, 99, 77, 45, 13, 56, 77],
+          },
+        ],
+      },
+      {
+        name: "2023",
+        data: [
+          {
+            name: "总收入",
+            data: [51, 35, 41, 10, 91, 69, 62, 148, 91, 69, 62, 49],
+          },
+          {
+            name: "总花费",
+            data: [56, 13, 34, 10, 77, 99, 88, 45, 77, 99, 88, 77],
+          },
+        ],
+      },
+    ],
+  }
 
+  useCopilotReadable({
+    description: "年销售额信息",
+    value: qvalue,
+  });
 
   const EcommerceYearlySalesView = () => (
     <EcommerceYearlySales
       title="年销售额"
       subheader="(+43%) 相比去年"
       defaultYear={defaultYear ?? "2023"}
-      chart={{
-        categories: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
-        series: [
-          {
-            name: "2022",
-            data: [
-              {
-                name: "总收入",
-                data: [10, 41, 35, 51, 49, 62, 69, 91, 148, 35, 51, 49],
-              },
-              {
-                name: "总花费",
-                data: [10, 34, 13, 56, 77, 88, 99, 77, 45, 13, 56, 77],
-              },
-            ],
-          },
-          {
-            name: "2023",
-            data: [
-              {
-                name: "总收入",
-                data: [51, 35, 41, 10, 91, 69, 62, 148, 91, 69, 62, 49],
-              },
-              {
-                name: "总花费",
-                data: [56, 13, 34, 10, 77, 99, 88, 45, 77, 99, 88, 77],
-              },
-            ],
-          },
-        ],
-      }}
+      chart={qvalue}
     />
   );
 
-  // useCopilotAction({
-  //   name: "selectYearToDisplay",
-  //   description: "选择展示不同年份的年销售额数据",
-  //   parameters: [
-  //     {
-  //       name: "year",
-  //       type: "string",
-  //       description: "年份",
-  //     },
-  //   ],
-  //   // handler: async ({year}) => {
-  //   //   setDefaultYear(year);
-  //   // },
-  //   render: ({status, args}) => {
-  //     const {year} = args;
-  //     if(year){
-  //       setDefaultYear(year);
-  //     }
-  //     if (status === 'inProgress') {
-  //       return <textarea>加载中</textarea>; // Your own component for loading state
-  //     }
-  //       return <> {EcommerceYearlySalesView}</>;
-  //
-  //   },
-  // });
+  useCopilotAction({
+    name: "selectYearToDisplay",
+    description: "选择展示不同年份的年销售额数据",
+    parameters: [
+      {
+        name: "year",
+        type: "string",
+        description: "年份",
+      },
+    ],
+    render: ({status, args}) => {
+      const {year} = args;
+      if (year) {
+        setDefaultYear(year);
+      }
+      if (status === 'inProgress') {
+        return <textarea>加载中</textarea>; // Your own component for loading state
+      }
+      return <> {EcommerceYearlySalesView}</>;
+
+
+    },
+  });
 
 
   return (
@@ -155,6 +159,10 @@ export function OverviewEcommerceView() {
           />
         </Grid>
 
+        <Grid xs={12} md={6} lg={8}>
+          <EcommerceYearlySalesView/>
+        </Grid>
+
         <Grid xs={12} md={6} lg={4}>
           <EcommerceSaleByGender
             title="服饰销售分区"
@@ -169,9 +177,7 @@ export function OverviewEcommerceView() {
           />
         </Grid>
 
-        <Grid xs={12} md={6} lg={8}>
-          <EcommerceYearlySalesView/>
-        </Grid>
+
 
         <Grid xs={12} md={6} lg={8}>
           <EcommerceSalesOverview title="销售概况" data={_ecommerceSalesOverview}/>

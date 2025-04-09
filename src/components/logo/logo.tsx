@@ -7,6 +7,7 @@ import { useId, forwardRef } from 'react';
 import Box from '@mui/material/Box';
 import NoSsr from '@mui/material/NoSsr';
 import { useTheme } from '@mui/material/styles';
+import {Iconify} from "src/components/iconify";
 
 import { RouterLink } from 'src/routes/components';
 
@@ -100,7 +101,9 @@ export const Logo = forwardRef<HTMLDivElement, LogoProps>(
           }}
           {...other}
         >
-          {logo}
+          {/* {logo} */}
+          {/* {'AI'} */}
+          <Iconify icon="hugeicons:ai-scan" width="100%" height="100%" viewBox="0 0 512 512" color='green'/>
         </Box>
       </NoSsr>
     );

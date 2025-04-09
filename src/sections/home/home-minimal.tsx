@@ -106,27 +106,27 @@ export function HomeMinimal({ sx, ...other }: StackProps) {
       sx={{
         overflow: 'hidden',
         position: 'relative',
-        py: { xs: 10, md: 20 },
+        // py: { xs: 10, md: 20 },
         ...sx,
       }}
       {...other}
     >
       <MotionViewport>
-        {renderLines}
+        {/* {renderLines} */}
 
-        <Container sx={{ position: 'relative' }}>
-          <Grid container columnSpacing={{ xs: 0, md: 8 }} sx={{ position: 'relative', zIndex: 9 }}>
-            <Grid xs={12} md={6} lg={7}>
-              {renderDescription}
-            </Grid>
+        {/* <Container sx={{ position: 'relative' }}> */}
+        {/*   <Grid container columnSpacing={{ xs: 0, md: 8 }} sx={{ position: 'relative', zIndex: 9 }}> */}
+        {/*     <Grid xs={12} md={6} lg={7}> */}
+        {/*       {renderDescription} */}
+        {/*     </Grid> */}
 
-            <Grid md={6} lg={5} sx={{ display: { xs: 'none', md: 'block' } }}>
-              {renderImg}
-            </Grid>
-          </Grid>
+        {/*     <Grid md={6} lg={5} sx={{ display: { xs: 'none', md: 'block' } }}> */}
+        {/*       {renderImg} */}
+        {/*     </Grid> */}
+        {/*   </Grid> */}
 
-          <CircleSvg variants={varFade().in} sx={{ display: { xs: 'none', md: 'block' } }} />
-        </Container>
+        {/*   <CircleSvg variants={varFade().in} sx={{ display: { xs: 'none', md: 'block' } }} /> */}
+        {/* </Container> */}
       </MotionViewport>
     </Stack>
   );

@@ -94,7 +94,7 @@ export function HomeHero({ sx, ...other }: StackProps) {
             ml: { xs: 0.75, md: 1, xl: 1.5 },
           }}
         >
-          智链云商
+          基于React的AI驱动型网络电商销售平台设计与实现
         </Box>
       </Box>
     </MInview>
@@ -134,7 +134,7 @@ export function HomeHero({ sx, ...other }: StackProps) {
             />
           ))}
         </AvatarGroup>
-        欢迎加入智链云商，一起开启智能commerce
+        欢迎加入平台，一起开启智能commerce
       </Box>
     </MInview>
   );
@@ -282,8 +282,8 @@ export function HomeHero({ sx, ...other }: StackProps) {
             <m.div style={{ y: y2 }}>{renderText}</m.div>
           </Stack>
           <m.div style={{ y: y3 }}>{renderRatings}</m.div>
-          <m.div style={{ y: y4 }}>{renderButtons}</m.div>
-          <m.div style={{ y: y5 }}>{renderIcons}</m.div>
+          {/* <m.div style={{ y: y4 }}>{renderButtons}</m.div> */}
+          <m.div style={{ y: y4 }}>{renderIcons}</m.div>
         </Container>
 
         <HeroBackground />

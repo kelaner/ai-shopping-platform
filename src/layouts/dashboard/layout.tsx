@@ -1,23 +1,27 @@
 'use client';
 
 import {CopilotPopup} from "@copilotkit/react-ui";
+import {useCopilotReadable} from "@copilotkit/react-core";
 
 import Alert from '@mui/material/Alert';
 import {iconButtonClasses} from '@mui/material/IconButton';
 import type {Breakpoint, CSSObject, SxProps, Theme} from '@mui/material/styles';
 import {useTheme} from '@mui/material/styles';
 
-import {useMemo} from 'react';
+import {useEffect, useMemo, useState} from 'react';
 import {_contacts, _notifications} from 'src/_mock';
 import type {NavSectionProps} from 'src/components/nav-section';
 import {bulletColor} from 'src/components/nav-section';
 import type {SettingsState} from 'src/components/settings';
 import {useSettingsContext} from 'src/components/settings';
+import {chainPrompt} from 'src/components/useLangchain/prompt';
+import {CONFIG} from "src/config-global";
 
 import {useBoolean} from 'src/hooks/use-boolean';
 
 import {allLangs} from 'src/locales';
 import {stylesMode, varAlpha} from 'src/theme/styles';
+import qaDataJson from "public/assets/json/qaDate.json"
 import {layoutClasses} from '../classes';
 import {_account} from '../config-nav-account';
 import {navData as dashboardNavData} from '../config-nav-dashboard';
@@ -29,6 +33,13 @@ import {Main} from './main';
 import {NavHorizontal} from './nav-horizontal';
 import {NavMobile} from './nav-mobile';
 import {NavVertical} from './nav-vertical';
+
+
+type QAPair = {
+  id: number;
+  question: string;
+  answer: string;
+};
 
 // ----------------------------------------------------------------------
 
@@ -42,6 +53,7 @@ export type DashboardLayoutProps = {
 
 export function DashboardLayout({sx, children, data}: DashboardLayoutProps) {
   const theme = useTheme();
+
 
   const mobileNavOpen = useBoolean();
 
@@ -60,10 +72,21 @@ export function DashboardLayout({sx, children, data}: DashboardLayoutProps) {
   const isNavVertical = isNavMini || settings.navLayout === 'vertical';
 
 
+  const [qaData, setQaData] = useState<QAPair[]>([]);
+
+  useEffect(() => {
+    setQaData(qaDataJson);
+  }, []);
+
+  useCopilotReadable({
+    description: '平台问答信息',
+    value: qaData
+  });
+
   return (
     <>
       <CopilotPopup
-        instructions="您正在尽最大努力帮助用户。根据您所掌握的数据，以最佳方式回答。注意，尽量以中文回答。注意，不要用代码格式回答！注意：不要回答任何涉及调用函数的问题与不要用调用函数来回答任何问题！"
+        instructions={chainPrompt}
         labels={{
           title: "智能客服",
           initial: "我有什么能帮您的吗?",

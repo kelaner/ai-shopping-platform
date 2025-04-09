@@ -4,15 +4,20 @@ import {ChatOpenAI} from "@langchain/openai";
 import {CopilotRuntime, LangChainAdapter, copilotRuntimeNextJSAppRouterEndpoint,} from '@copilotkit/runtime';
 
 const model = new ChatOpenAI({
-  model: "deepseek-chat",
-  apiKey: process.env.DEEPSEEK_API_KEY,
+  model: "glm-4-flash",
+  apiKey: process.env.ZHIPUAI_API_KEY,
+  // temperature: 0.01,
   configuration: {
-    baseURL: "https://api.deepseek.com/v1"
+    baseURL: "https://open.bigmodel.cn/api/paas/v4/"
   }
 });
 
 const serviceAdapter = new LangChainAdapter({
-  chainFn: async ({messages, tools}) => model.stream(messages)
+  chainFn: async ({ messages, tools }) => {
+    return model.bindTools(tools).stream(messages);
+    // or optionally enable strict mode
+    // return model.bindTools(tools, { strict: true }).stream(messages);
+  }
 });
 
 const runtime = new CopilotRuntime();
