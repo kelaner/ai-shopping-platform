@@ -99,9 +99,11 @@ export function InvoiceNewEditForm({ currentInvoice }: Props) {
     [currentInvoice]
   );
 
+
   const methods = useForm<NewInvoiceSchemaType>({
     mode: 'all',
     resolver: zodResolver(NewInvoiceSchema),
+    // @ts-ignore
     defaultValues,
   });
 

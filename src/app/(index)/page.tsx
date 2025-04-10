@@ -3,9 +3,9 @@ import { HomeView } from 'src/sections/home/view';
 // ----------------------------------------------------------------------
 
 export const metadata = {
-  title: 'Minimals UI: The starting point for your next project',
+  title: '基于React的AI驱动型网络电商销售平台设计与实现',
   description:
-    'The starting point for your next project with Minimal UI Kit, built on the newest version of Material-UI ©, ready to be customized to your style',
+    '',
 };
 
 export default function Page() {
