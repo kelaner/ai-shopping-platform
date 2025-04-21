@@ -35,11 +35,21 @@ export function NotificationItem({ notification }: { notification: NotificationI
         <Stack
           alignItems="center"
           justifyContent="center"
-          sx={{ width: 40, height: 40, borderRadius: '50%', bgcolor: 'background.neutral' }}
+          sx={{
+            width: 40,
+            height: 40,
+            borderRadius: '50%',
+            bgcolor: 'background.neutral',
+          }}
         >
           <Box
             component="img"
-            src={`${CONFIG.site.basePath}/assets/icons/notification/${(notification.type === 'order' && 'ic-order') || (notification.type === 'chat' && 'ic-chat') || (notification.type === 'mail' && 'ic-mail') || (notification.type === 'delivery' && 'ic-delivery')}.svg`}
+            src={`${CONFIG.site.basePath}/assets/icons/notification/${
+              (notification.type === 'order' && 'ic-order') ||
+              (notification.type === 'chat' && 'ic-chat') ||
+              (notification.type === 'mail' && 'ic-mail') ||
+              (notification.type === 'delivery' && 'ic-delivery')
+            }.svg`}
             sx={{ width: 24, height: 24 }}
           />
         </Stack>

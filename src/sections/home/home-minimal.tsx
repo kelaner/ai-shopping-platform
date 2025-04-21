@@ -19,7 +19,7 @@ import { CircleSvg, FloatLine, FloatPlusIcon } from './components/svg-elements';
 
 // ----------------------------------------------------------------------
 
-export function HomeMinimal({ sx, ...other }: StackProps) {
+export function HomeComponent({ sx, ...other }: StackProps) {
   const renderLines = (
     <>
       <FloatPlusIcon sx={{ top: 72, left: 72 }} />

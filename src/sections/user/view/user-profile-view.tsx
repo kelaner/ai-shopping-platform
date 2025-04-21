@@ -28,16 +28,20 @@ import { ProfileFollowers } from '../profile-followers';
 // ----------------------------------------------------------------------
 
 const TABS = [
-  { value: 'profile', label: 'Profile', icon: <Iconify icon="solar:user-id-bold" width={24} /> },
-  { value: 'followers', label: 'Followers', icon: <Iconify icon="solar:heart-bold" width={24} /> },
+  {
+    value: 'profile',
+    label: '个人资料主页',
+    icon: <Iconify icon="solar:user-id-bold" width={24} />,
+  },
+  { value: 'followers', label: '跟随', icon: <Iconify icon="solar:heart-bold" width={24} /> },
   {
     value: 'friends',
-    label: 'Friends',
+    label: '好友',
     icon: <Iconify icon="solar:users-group-rounded-bold" width={24} />,
   },
   {
     value: 'gallery',
-    label: 'Gallery',
+    label: '画廊',
     icon: <Iconify icon="solar:gallery-wide-bold" width={24} />,
   },
 ];

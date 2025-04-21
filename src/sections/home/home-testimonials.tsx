@@ -59,9 +59,9 @@ export function HomeTestimonials({ sx, ...other }: StackProps) {
 
   const renderDescription = (
     <SectionTitle
-      caption="testimonials"
-      title="Rumors are flying"
-      txtGradient="that..."
+      caption="推荐"
+      title="好评上升"
+      txtGradient="中..."
       sx={{ mb: { xs: 5, md: 8 }, textAlign: 'center' }}
     />
   );
@@ -153,16 +153,16 @@ export function HomeTestimonials({ sx, ...other }: StackProps) {
 
       <Stack spacing={5} direction={{ xs: 'column', md: 'row' }} divider={verticalDivider}>
         {[
-          { label: 'Purchased order', value: 12.121 },
-          { label: 'Happy customers', value: 160 },
-          { label: 'Review rate', value: 4.9 },
+          { label: '采购订单', value: 12.121 },
+          { label: '满意顾客', value: 160 },
+          { label: '流水金额', value: 131.313 },
         ].map((item) => (
           <Stack key={item.label} spacing={2} sx={{ textAlign: 'center', width: 1 }}>
             <m.div variants={varFade({ distance: 24 }).inUp}>
               <AnimateCountUp
                 to={item.value}
-                unit={item.label === 'Purchased order' ? 'k+' : '+'}
-                toFixed={item.label === 'Happy customers' ? 0 : 1}
+                unit={item.label === '满意顾客' ? '+' : 'k+'}
+                toFixed={item.label === '满意顾客' ? 0 : 1}
                 sx={{
                   fontWeight: 'fontWeightBold',
                   fontSize: { xs: 40, md: 64 },
@@ -223,53 +223,50 @@ const base = (index: number) => ({
 const TESTIMONIALS = [
   {
     ...base(1),
-    category: 'Design Quality',
-    content: `The quality of this template is very good, the TypeScript files are neat and the communication with the team behind this template is very good! I would recommend this template for any kind of project, as they implement new features every now and then and enhance their design. I will definitely be using more templates from this team and re-purchasing this template for other projects.`,
+    category: '智能推荐',
+    content: `这个电商平台的智能推荐太强大了！每次推荐的商品都完全符合我的喜好和需求，感觉它比我自己还了解我。借助AI算法，精准地为我推送各种心仪好物，大大节省了我的购物时间。`,
     postedAt: 'April 20, 2024 23:15:30',
   },
   {
     ...base(2),
-    category: 'Design Quality',
-    content: `Amazing. I've never purchased complete front ends before, but I'll definitely be doing this again!`,
+    category: '智能客服',
+    content: `智能客服的响应速度超快，而且能理解复杂的问题并给出准确的答案。无论是咨询商品信息还是处理售后问题，AI客服都能高效解决，就像有个专业的购物顾问随时在身边。`,
     postedAt: 'March 19, 2024 23:15:30',
   },
   {
     ...base(3),
-    category: 'Code Quality',
-    content: `Clean & Complete (Design & Code). Thansk Minimal team :)`,
+    category: '个性化体验',
+    content: `平台通过AI分析我的购物历史和行为习惯，为我定制了专属的购物界面和优惠活动。这种个性化的体验让我感觉自己备受重视，购物变得更加有趣和贴心。`,
     postedAt: 'April 19, 2023 23:15:30',
   },
   {
     ...base(4),
-    category: 'Customer Support',
-    content: `Thanks to Minimal for customer support with email. I solved the problem. And the code quality is good, too.`,
+    category: '价格预测',
+    content: `AI驱动的价格预测功能太实用了！它能根据市场趋势和历史数据，预测商品价格的走势，帮助我在最合适的时机下单，节省了不少开支。`,
     postedAt: 'May 19, 2023 23:15:30',
   },
   {
     ...base(5),
-    category: 'Customer Support',
-    content:
-      'Great UI kit, really beautiful as well. Also the customer support is very warm-hearted. However, I hope the components and themes can be provided as a separated project (package).',
+    category: '智能搜索',
+    content: `即使我的搜索关键词描述不太准确，智能搜索也能快速理解我的意图并给出相关的商品结果。AI技术让搜索变得更加智能和高效，找东西再也不费劲了。`,
     postedAt: 'June 19, 2023 23:15:30',
   },
   {
     ...base(6),
-    category: 'Design Quality',
-    content: 'I would never have been able to create all these beautifull components myself!',
+    category: '智能推荐',
+    content: `自从用了这个平台的智能推荐，我发现了好多以前没关注过但又特别喜欢的商品。AI算法不断学习我的偏好，推荐的商品越来越合我心意。`,
     postedAt: 'July 19, 2023 23:15:30',
   },
   {
     ...base(7),
-    category: 'Code Quality',
-    content:
-      'The quality of this template is excellent. However, as an individual, the cost of obtaining the TypeScript Source version is beyond my means. Despite my strong desire to acquire it, my limited personal budget does not allow me to do so.',
+    category: '风险防控',
+    content: `AI在平台的风险防控方面做得非常出色。它能实时监测交易数据，识别潜在的风险，保障我的购物安全和资金安全，让我购物无后顾之忧。`,
     postedAt: 'August 19, 2023 23:15:30',
   },
   {
     ...base(8),
-    category: 'Customizability',
-    content:
-      'The design and code quality are impressive. Regular updates and excellent customer support are major advantages.',
+    category: '智能营销',
+    content: `平台的智能营销活动很有针对性，AI根据我的兴趣推送的优惠券和活动，让我享受到了很多实惠。这种精准的营销方式让我更愿意在平台上消费。`,
     postedAt: 'September 19, 2023 23:15:30',
   },
 ];

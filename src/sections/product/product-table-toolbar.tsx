@@ -76,14 +76,14 @@ export function ProductTableToolbar({ filters, options }: Props) {
   return (
     <>
       <FormControl sx={{ flexShrink: 0, width: { xs: 1, md: 200 } }}>
-        <InputLabel htmlFor="product-filter-stock-select-label">Stock</InputLabel>
+        <InputLabel htmlFor="product-filter-stock-select-label">库存</InputLabel>
 
         <Select
           multiple
           value={local.state.stock}
           onChange={handleChangeStock}
           onClose={handleFilterStock}
-          input={<OutlinedInput label="Stock" />}
+          input={<OutlinedInput label="库存" />}
           renderValue={(selected) => selected.map((value) => value).join(', ')}
           inputProps={{ id: 'product-filter-stock-select-label' }}
           sx={{ textTransform: 'capitalize' }}
@@ -108,13 +108,13 @@ export function ProductTableToolbar({ filters, options }: Props) {
               bgcolor: (theme) => varAlpha(theme.vars.palette.grey['500Channel'], 0.08),
             }}
           >
-            Apply
+            应用
           </MenuItem>
         </Select>
       </FormControl>
 
       <FormControl sx={{ flexShrink: 0, width: { xs: 1, md: 200 } }}>
-        <InputLabel htmlFor="product-filter-publish-select-label">Publish</InputLabel>
+        <InputLabel htmlFor="product-filter-publish-select-label">状态</InputLabel>
         <Select
           multiple
           value={local.state.publish}
@@ -148,7 +148,7 @@ export function ProductTableToolbar({ filters, options }: Props) {
               bgcolor: (theme) => varAlpha(theme.vars.palette.grey['500Channel'], 0.08),
             }}
           >
-            Apply
+            应用
           </MenuItem>
         </Select>
       </FormControl>

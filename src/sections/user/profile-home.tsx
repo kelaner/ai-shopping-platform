@@ -49,14 +49,14 @@ export function ProfileHome({ info, posts }: Props) {
         <Stack width={1}>
           {fNumber(info.totalFollowers)}
           <Box component="span" sx={{ color: 'text.secondary', typography: 'body2' }}>
-            Follower
+            关注
           </Box>
         </Stack>
 
         <Stack width={1}>
           {fNumber(info.totalFollowing)}
           <Box component="span" sx={{ color: 'text.secondary', typography: 'body2' }}>
-            Following
+            被关注
           </Box>
         </Stack>
       </Stack>

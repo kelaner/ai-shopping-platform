@@ -4,7 +4,12 @@ import Button from '@mui/material/Button';
 
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
-import type {GridColDef, GridColumnVisibilityModel, GridRowSelectionModel, GridSlots,} from '@mui/x-data-grid';
+import type {
+  GridColDef,
+  GridColumnVisibilityModel,
+  GridRowSelectionModel,
+  GridSlots,
+} from '@mui/x-data-grid';
 import {
   DataGrid,
   GridActionsCellItem,
@@ -16,25 +21,25 @@ import {
   GridToolbarQuickFilter,
 } from '@mui/x-data-grid';
 
-import {useCallback, useEffect, useState} from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
-import {PRODUCT_STOCK_OPTIONS} from 'src/_mock';
-import {useGetProducts} from 'src/actions/product';
-import {ConfirmDialog} from 'src/components/custom-dialog';
-import {EmptyContent} from 'src/components/empty-content';
-import {Iconify} from 'src/components/iconify';
+import { PRODUCT_STOCK_OPTIONS } from 'src/_mock';
+import { useGetProducts } from 'src/actions/product';
+import { ConfirmDialog } from 'src/components/custom-dialog';
+import { EmptyContent } from 'src/components/empty-content';
+import { Iconify } from 'src/components/iconify';
 
-import {toast} from 'src/components/snackbar';
+import { toast } from 'src/components/snackbar';
 
-import {useBoolean} from 'src/hooks/use-boolean';
-import type {UseSetStateReturn} from 'src/hooks/use-set-state';
-import {useSetState} from 'src/hooks/use-set-state';
-import {DashboardContent} from 'src/layouts/dashboard';
-import {useRouter} from 'src/routes/hooks';
+import { useBoolean } from 'src/hooks/use-boolean';
+import type { UseSetStateReturn } from 'src/hooks/use-set-state';
+import { useSetState } from 'src/hooks/use-set-state';
+import { DashboardContent } from 'src/layouts/dashboard';
+import { useRouter } from 'src/routes/hooks';
 
-import {paths} from 'src/routes/paths';
-import type {IProductItem, IProductTableFilters} from 'src/types/product';
-import {ProductTableFiltersResult} from '../product-table-filters-result';
+import { paths } from 'src/routes/paths';
+import type { IProductItem, IProductTableFilters } from 'src/types/product';
+import { ProductTableFiltersResult } from '../product-table-filters-result';
 import {
   RenderCellCreatedAt,
   RenderCellPrice,
@@ -43,16 +48,16 @@ import {
   RenderCellStock,
 } from '../product-table-row';
 
-import {ProductTableToolbar} from '../product-table-toolbar';
+import { ProductTableToolbar } from '../product-table-toolbar';
 
 // ----------------------------------------------------------------------
 
 const PUBLISH_OPTIONS = [
-  {value: 'published', label: '发布'},
-  {value: 'draft', label: '草稿'},
+  { value: 'published', label: '发布' },
+  { value: 'draft', label: '草稿' },
 ];
 
-const HIDE_COLUMNS = {category: false};
+const HIDE_COLUMNS = { category: false };
 
 const HIDE_COLUMNS_TOGGLABLE = ['category', 'actions'];
 
@@ -63,9 +68,9 @@ export function ProductListView() {
 
   const router = useRouter();
 
-  const {products, productsLoading} = useGetProducts();
+  const { products, productsLoading } = useGetProducts();
 
-  const filters = useSetState<IProductTableFilters>({publish: [], stock: []});
+  const filters = useSetState<IProductTableFilters>({ publish: [], stock: [] });
 
   const [tableData, setTableData] = useState<IProductItem[]>([]);
 
@@ -84,7 +89,7 @@ export function ProductListView() {
 
   const canReset = filters.state.publish.length > 0 || filters.state.stock.length > 0;
 
-  const dataFiltered = applyFilter({inputData: tableData, filters: filters.state});
+  const dataFiltered = applyFilter({ inputData: tableData, filters: filters.state });
 
   const handleDeleteRow = useCallback(
     (id: string) => {
@@ -135,7 +140,7 @@ export function ProductListView() {
   );
 
   const columns: GridColDef[] = [
-    {field: 'category', headerName: '分类', filterable: false},
+    { field: 'category', headerName: '分类', filterable: false },
     {
       field: 'name',
       headerName: '产品名',
@@ -143,14 +148,14 @@ export function ProductListView() {
       minWidth: 360,
       hideable: false,
       renderCell: (params) => (
-        <RenderCellProduct params={params} onViewRow={() => handleViewRow(params.row.id)}/>
+        <RenderCellProduct params={params} onViewRow={() => handleViewRow(params.row.id)} />
       ),
     },
     {
       field: 'createdAt',
       headerName: '创建时间',
       width: 160,
-      renderCell: (params) => <RenderCellCreatedAt params={params}/>,
+      renderCell: (params) => <RenderCellCreatedAt params={params} />,
     },
     {
       field: 'inventoryType',
@@ -158,14 +163,14 @@ export function ProductListView() {
       width: 160,
       type: 'singleSelect',
       valueOptions: PRODUCT_STOCK_OPTIONS,
-      renderCell: (params) => <RenderCellStock params={params}/>,
+      renderCell: (params) => <RenderCellStock params={params} />,
     },
     {
       field: 'price',
       headerName: '价格',
       width: 140,
       editable: true,
-      renderCell: (params) => <RenderCellPrice params={params}/>,
+      renderCell: (params) => <RenderCellPrice params={params} />,
     },
     {
       field: 'publish',
@@ -174,7 +179,9 @@ export function ProductListView() {
       type: 'singleSelect',
       editable: true,
       valueOptions: PUBLISH_OPTIONS,
-      renderCell: (params) => <RenderCellPublish params={params}/>,
+      renderCell: (params) => (
+        <RenderCellPublish params={params } />
+      ),
     },
     // {
     //   type: 'actions',
@@ -214,13 +221,12 @@ export function ProductListView() {
 
   const getTogglableColumns = () =>
     columns
-    .filter((column) => !HIDE_COLUMNS_TOGGLABLE.includes(column.field))
-    .map((column) => column.field);
-
+      .filter((column) => !HIDE_COLUMNS_TOGGLABLE.includes(column.field))
+      .map((column) => column.field);
 
   return (
     <>
-      <DashboardContent sx={{flexGrow: 1, display: 'flex', flexDirection: 'column'}}>
+      <DashboardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
         {/* <CustomBreadcrumbs */}
         {/*   heading="List" */}
         {/*   links={[ */}
@@ -243,10 +249,10 @@ export function ProductListView() {
 
         <Card
           sx={{
-            flexGrow: {md: 1},
-            display: {md: 'flex'},
-            height: {xs: 800, md: 2},
-            flexDirection: {md: 'column'},
+            flexGrow: { md: 1 },
+            display: { md: 'flex' },
+            height: { xs: 800, md: 2 },
+            flexDirection: { md: 'column' },
           }}
         >
           <DataGrid
@@ -257,22 +263,22 @@ export function ProductListView() {
             loading={productsLoading}
             getRowHeight={() => 'auto'}
             pageSizeOptions={[5, 10, 25]}
-            initialState={{pagination: {paginationModel: {pageSize: 10}}}}
+            initialState={{ pagination: { paginationModel: { pageSize: 10 } } }}
             onRowSelectionModelChange={(newSelectionModel) => setSelectedRowIds(newSelectionModel)}
             columnVisibilityModel={columnVisibilityModel}
             onColumnVisibilityModelChange={(newModel) => setColumnVisibilityModel(newModel)}
             slots={{
               toolbar: CustomToolbarCallback as GridSlots['toolbar'],
-              noRowsOverlay: () => <EmptyContent/>,
-              noResultsOverlay: () => <EmptyContent title="No results found"/>,
+              noRowsOverlay: () => <EmptyContent />,
+              noResultsOverlay: () => <EmptyContent title="No results found" />,
             }}
             slotProps={{
-              panel: {anchorEl: filterButtonEl},
+              panel: { anchorEl: filterButtonEl },
               // @ts-ignore
-              toolbar: {setFilterButtonEl},
-              columnsManagement: {getTogglableColumns},
+              toolbar: { setFilterButtonEl },
+              columnsManagement: { getTogglableColumns },
             }}
-            sx={{[`& .${gridClasses.cell}`]: {alignItems: 'center', display: 'inline-flex'}}}
+            sx={{ [`& .${gridClasses.cell}`]: { alignItems: 'center', display: 'inline-flex' } }}
           />
         </Card>
       </DashboardContent>
@@ -315,22 +321,22 @@ interface CustomToolbarProps {
 }
 
 function CustomToolbar({
-                         filters,
-                         canReset,
-                         selectedRowIds,
-                         filteredResults,
-                         setFilterButtonEl,
-                         onOpenConfirmDeleteRows,
-                       }: CustomToolbarProps) {
+  filters,
+  canReset,
+  selectedRowIds,
+  filteredResults,
+  setFilterButtonEl,
+  onOpenConfirmDeleteRows,
+}: CustomToolbarProps) {
   return (
     <>
       <GridToolbarContainer>
         <ProductTableToolbar
           filters={filters}
-          options={{stocks: PRODUCT_STOCK_OPTIONS, publishs: PUBLISH_OPTIONS}}
+          options={{ stocks: PRODUCT_STOCK_OPTIONS, publishs: PUBLISH_OPTIONS }}
         />
 
-        <GridToolbarQuickFilter/>
+        <GridToolbarQuickFilter />
 
         <Stack
           spacing={1}
@@ -343,16 +349,16 @@ function CustomToolbar({
             <Button
               size="small"
               color="error"
-              startIcon={<Iconify icon="solar:trash-bin-trash-bold"/>}
+              startIcon={<Iconify icon="solar:trash-bin-trash-bold" />}
               onClick={onOpenConfirmDeleteRows}
             >
               Delete ({selectedRowIds.length})
             </Button>
           )}
 
-          <GridToolbarColumnsButton/>
-          <GridToolbarFilterButton ref={setFilterButtonEl}/>
-          <GridToolbarExport/>
+          <GridToolbarColumnsButton />
+          <GridToolbarFilterButton ref={setFilterButtonEl} />
+          <GridToolbarExport />
         </Stack>
       </GridToolbarContainer>
 
@@ -360,7 +366,7 @@ function CustomToolbar({
         <ProductTableFiltersResult
           filters={filters}
           totalResults={filteredResults}
-          sx={{p: 2.5, pt: 0}}
+          sx={{ p: 2.5, pt: 0 }}
         />
       )}
     </>
@@ -374,8 +380,8 @@ type ApplyFilterProps = {
   filters: IProductTableFilters;
 };
 
-function applyFilter({inputData, filters}: ApplyFilterProps) {
-  const {stock, publish} = filters;
+function applyFilter({ inputData, filters }: ApplyFilterProps) {
+  const { stock, publish } = filters;
 
   if (stock.length) {
     inputData = inputData.filter((product) => stock.includes(product.inventoryType));

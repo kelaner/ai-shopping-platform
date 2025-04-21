@@ -25,7 +25,7 @@ export function RenderCellPrice({ params }: ParamsProps) {
 export function RenderCellPublish({ params }: ParamsProps) {
   return (
     <Label variant="soft" color={(params.row.publish === 'published' && 'info') || 'default'}>
-      {params.row.publish}
+      {params.row.publish === 'Draft' ? '草稿中' : '已发布'}
     </Label>
   );
 }

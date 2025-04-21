@@ -25,100 +25,61 @@ import { FloatLine, FloatPlusIcon, FloatTriangleDownIcon } from './components/sv
 
 const FAQs = [
   {
-    question: 'How can I get the update?',
+    question: '什么是AI驱动型网络电商销售平台？',
     answer: (
       <Typography>
-        You will get 12 months of free
-        <Link
-          href="https://support.mui.com/hc/en-us/articles/360008775240-How-do-I-get-access-to-an-item-I-purchased"
-          target="_blank"
-          rel="noopener"
-          sx={{ mx: 0.5 }}
-        >
-          updates
-        </Link>
-        with the purchase. Please renew your license to get updates after that.
+        AI驱动型网络电商销售平台是一种利用人工智能技术（如机器学习、自然语言处理等）来提升用户体验、优化运营效率和提高销售转化率的电商平台。例如，通过智能推荐系统为用户推荐个性化商品，或者通过智能客服快速解答用户问题。
       </Typography>
     ),
   },
   {
-    question: 'Which license is right for you?',
+    question: '平台的主要功能有哪些？',
     answer: (
       <Box component="ul" sx={{ pl: 3, listStyleType: 'disc' }}>
-        <li> All licenses do not apply to open source.</li>
-        <li> One licenses / one end product (3 licenses / 3 products...).</li>
-        <li>
-          <strong>Standard / Plus</strong> license used in free products (Internal management...).
-        </li>
-        <li>
-          <strong>Extended</strong> license used in charge products, collect fees from users
-          (SAAS...).
-        </li>
-        <li>
-          Learn more about the
-          <Link
-            href="https://docs.minimals.cc/package/"
-            target="_blank"
-            rel="noopener"
-            sx={{ mx: 0.5 }}
-          >
-            package & license
-          </Link>
-        </li>
+        <li> 个性化商品推荐：根据用户的历史行为和偏好，智能推荐符合用户需求的商品。</li>
+        <li> 智能客服：24/7在线解答用户问题，提供快速响应。</li>
+        <li>智能搜索：支持自然语言搜索，快速找到用户想要的商品。</li>
+        <li>数据分析与洞察：通过AI分析用户行为和销售数据，帮助商家优化运营策略。</li>
       </Box>
     ),
   },
   {
-    question: 'How long is my license valid for?',
-    answer: (
-      <Box component="ul" sx={{ pl: 3, listStyleType: 'disc' }}>
-        <li> The license is lifetime.</li>
-        <li> You get 12 months of free updates.</li>
-      </Box>
-    ),
-  },
-  {
-    question: 'Which platforms will the template support?',
+    question: '如何注册并登录平台？',
     answer: (
       <Typography>
-        {`The components in MUI are designed to work in the latest, stable releases of all major browsers, including Chrome, Firefox, Safari, and Edge. We don't support Internet Explorer 11. `}
-        Learn more about the
-        <Link
-          href="https://mui.com/material-ui/getting-started/supported-platforms/"
-          target="_blank"
-          rel="noopener"
-          sx={{ mx: 0.5 }}
-        >
-          supported platforms
-        </Link>
+        您可以通过点击登录页的“注册”按钮，填写必要的信息完成注册。注册完成后，使用注册的账号和密码登录即可。
       </Typography>
     ),
   },
   {
-    question: 'For what kind of projects is the Standard license intended?',
+    question: '平台支持哪些支付方式？',
     answer: (
       <Typography>
-        The Standard license is designed for internal applications in which staff will access the
-        application. An example could be the back-office dashboard of a public-facing e-commerce
-        website in which staff would sign in and manage inventory, customers, etc.
+        平台支持多种支付方式，包括但不限于信用卡、借记卡、支付宝、微信支付以及货到付款（部分商家支持）。您可以根据自己的需求选择合适的支付方式。
       </Typography>
     ),
   },
   {
-    question: 'Do you have a free demo to review the code before purchasing?',
+    question: '我可以如何跟踪我的订单状态？',
     answer: (
       <Typography>
-        Yes, you can check out our
-        <Link
-          href="https://mui.com/store/items/minimal-dashboard-free/"
-          target="_blank"
-          rel="noopener"
-          sx={{ mx: 0.5 }}
-        >
-          open source
-        </Link>
-        dashboard template which should give you an overview of the code quality and folder
-        structure. Keep in mind that some aspects may differ from this Paid version.
+        您可以在“订单”页面查看订单的详细信息和物流状态。平台会实时更新订单进度，确保您随时掌握订单动态。
+      </Typography>
+    ),
+  },
+  {
+    question: '智能客服能解决什么问题？',
+    answer: (
+      <Typography>
+        智能客服可以快速解答您的常见问题，如订单查询、商品信息、退换货政策等。
+      </Typography>
+    ),
+  },
+  {
+    question: '平台的退换货政策是什么？',
+    answer: (
+      <Typography>
+        平台支持7天无理由退换货（部分商品除外）。如果您对商品不满意，可以在收到商品后的7天内申请退换货。具体政策请参考平台的退换货规则。
       </Typography>
     ),
   },
@@ -134,12 +95,7 @@ export function HomeFAQs({ sx, ...other }: StackProps) {
   };
 
   const renderDescription = (
-    <SectionTitle
-      caption="FAQs"
-      title="We’ve got the"
-      txtGradient="answers"
-      sx={{ textAlign: 'center' }}
-    />
+    <SectionTitle caption="FAQs" title="我们已有" txtGradient="解答" sx={{ textAlign: 'center' }} />
   );
 
   const renderContent = (
@@ -218,12 +174,12 @@ export function HomeFAQs({ sx, ...other }: StackProps) {
       }}
     >
       <m.div variants={varFade().in}>
-        <Typography variant="h4">Still have questions?</Typography>
+        <Typography variant="h4">仍有问题？</Typography>
       </m.div>
 
       <m.div variants={varFade().in}>
         <Typography sx={{ mt: 2, mb: 3, color: 'text.secondary' }}>
-          Please describe your case to receive the most accurate advice
+          请描述您的案例，以获得最准确的建议。
         </Typography>
       </m.div>
 
@@ -234,7 +190,7 @@ export function HomeFAQs({ sx, ...other }: StackProps) {
           href="mailto:support@minimals.cc?subject=[Feedback] from Customer"
           startIcon={<Iconify icon="fluent:mail-24-filled" />}
         >
-          Contact us
+          联系我们
         </Button>
       </m.div>
     </Stack>
@@ -242,7 +198,7 @@ export function HomeFAQs({ sx, ...other }: StackProps) {
 
   return (
     <Stack component="section" sx={{ ...sx }} {...other}>
-      <MotionViewport sx={{ py: 10, position: 'relative' }}>
+      <MotionViewport sx={{ pt: 10, position: 'relative' }}>
         <TopLines />
 
         <Container>
